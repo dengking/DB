@@ -11,3 +11,5 @@
 [SQL Parser](https://github.com/alibaba/druid/wiki/SQL-Parser)
 
 [mozilla](https://github.com/mozilla)/**[moz-sql-parser](https://github.com/mozilla/moz-sql-parser)**
+
+[cybergarage](https://github.com/cybergarage)/**[usql](https://github.com/cybergarage/usql)**
