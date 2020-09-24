@@ -1,5 +1,7 @@
 # [Architecture of SQLite](https://www.sqlite.org/arch.html)
 
+
+
 ## Introduction
 
 A nearby diagram shows the main components of SQLite and how they interoperate. The text below explains the roles of the various components.
@@ -36,6 +38,8 @@ Note that in this design, the tokenizer calls the parser. People who are familia
 
 The parser assigns meaning to tokens based on their context. The parser for SQLite is generated using the [Lemon parser generator](https://www.sqlite.org/lemon.html). 
 
+
+
 ## Code Generator
 
 > NOTE: 这个步骤是最最复杂的，它需要考虑database的底层实现，比如table是如何实现的；然后转换为对应的code
@@ -50,16 +54,22 @@ The [bytecode](https://www.sqlite.org/opcode.html) program created by the code g
 
 SQLite implements SQL functions using callbacks to C-language routines. Even the built-in SQL functions are implemented this way.
 
+
+
 ## B-Tree
 
 > NOTE: 关于B-Tree，参见工程discrete。
 
 An SQLite database is maintained on disk using a B-tree implementation found in the [btree.c](https://sqlite.org/src/file/src/btree.c) source file. 
 
+
+
 ## OS Interface
 
 In order to provide portability between across operating systems, SQLite uses abstract object called the [VFS](https://www.sqlite.org/vfs.html).
 
 > NOTE: VFS是virtual file system，显然它是一种abstraction
+
+
 
 ## Utilities
