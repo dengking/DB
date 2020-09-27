@@ -23,23 +23,43 @@ Individual virtual table implementations might impose additional constraints. Fo
 
 See the [list of virtual tables](https://www.sqlite.org/vtablist.html) page for a longer list of actual virtual table implementations.
 
-### 1.1. Usage
+## 1.1. Usage
+
+### [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang_createvtab.html) 
 
 A virtual table is created using a [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang_createvtab.html) statement.
 
-#### 1.1.1. Temporary virtual tables
+> NOTE:思考：如何register module？这在下面的“1.2. Implementation”章节中进行了详细介绍。
 
-#### 1.1.2. Eponymous virtual tables
+### Module-argument 
+
+The format of the arguments to the module is very general. Each **module-argument** may contain keywords, string literals, identifiers, numbers, and punctuation. Each **module-argument** is passed as written (as text) into the [constructor method](https://sqlite.org/vtab.html#xcreate) of the virtual table implementation when the virtual table is created and that constructor is responsible for parsing and interpreting the arguments. The argument syntax is sufficiently general that a virtual table implementation can, if it wants to, interpret its arguments as [column definitions](https://sqlite.org/lang_createtable.html#tablecoldef) in an ordinary [CREATE TABLE](https://sqlite.org/lang_createtable.html) statement. The implementation could also impose some other interpretation on the arguments.
+
+> NOTE: 由constructor method来实现对module-argument的parsing and interpreting；
+>
+> 可以将column definition通过module-argument传入。
+
+### 1.1.1. Temporary virtual tables
+
+### 1.1.2. Eponymous virtual tables
 
 > NOTE: "eponymous"的意思是: 以本名命名的
+>
+> 所谓的Eponymous virtual table，其实就是sqlite实现中，使用到的virtual table，比如非常典型的：[dbstat virtual table](https://sqlite.org/dbstat.html).
 
 
 
-### 1.2. Implementation
+## 1.2. Implementation
 
 
 
+### The [sqlite3_module](https://sqlite.org/c3ref/module.html) structure
 
+> NOTE: 更加准确地说是“virtual table module”，这个名称更好理解。
+
+Think of a module as a class from which one can construct multiple virtual tables having similar properties. For example, one might have a module that provides read-only access to comma-separated-value (CSV) files on disk. That one module can then be used to create several virtual tables where each virtual table refers to a different CSV file.
+
+> NOTE: 也就是说，一类virtual table，需要实现一个virtual table module，比如上面提及的： read-only access to comma-separated-value (CSV) files。
 
 ```C++
 struct sqlite3_module {
@@ -85,7 +105,47 @@ struct sqlite3_module {
 
 > NOTE: 传入一个 `sqlite3_module` 实例，该实例的每个成员指向对应的实现函数
 
+The module structure defines all of the methods for each virtual table object. 
+
+
+
+### The [sqlite3_vtab](https://sqlite.org/c3ref/vtab.html) structure
+
+```C
+struct sqlite3_vtab {
+  const sqlite3_module *pModule;
+  int nRef;
+  char *zErrMsg;
+};
+```
+
+
+
+Virtual table implementations will normally **subclass** this structure to add additional private and implementation-specific fields. 
+
+> NOTE: 如何实现subclass？C中貌似没有subclass机制
+
+The `nRef` field is used internally by the SQLite core and should not be altered by the virtual table implementation. The virtual table implementation may pass error message text to the core by putting an error message string in `zErrMsg`. Space to hold this error message string must be obtained from an SQLite memory allocation function such as [sqlite3_mprintf()](https://sqlite.org/c3ref/mprintf.html) or [sqlite3_malloc()](https://sqlite.org/c3ref/free.html). Prior to assigning a new value to `zErrMsg`, the virtual table implementation must free any preexisting content of `zErrMsg` using [sqlite3_free()](https://sqlite.org/c3ref/free.html). Failure to do this will result in a memory leak.
+
+> NOTE: 看了，sqlite是自己实现的memory management。
+
+
+
+### The [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) structure
+
+> NOTE: [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) 其实相当于一个 pointer
+
+
+
+### Register module: `sqlite3_create_module`
+
+Before a [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) statement can be run, the module specified in that statement must be registered with the database connection. This is accomplished using either of the [sqlite3_create_module()](https://sqlite.org/c3ref/create_module.html) or [sqlite3_create_module_v2()](https://sqlite.org/c3ref/create_module.html) interfaces.
+
+
+
 ### 1.3. Virtual Tables And Shared Cache
+
+
 
 ### 1.4. Creating New Virtual Table Implementations
 
