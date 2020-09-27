@@ -13,3 +13,5 @@
 [mozilla](https://github.com/mozilla)/**[moz-sql-parser](https://github.com/mozilla/moz-sql-parser)**
 
 [cybergarage](https://github.com/cybergarage)/**[usql](https://github.com/cybergarage/usql)**
+
+[madanjhawar](https://github.com/madanjhawar)/**[Mini-SQL-Engine](https://github.com/madanjhawar/Mini-SQL-Engine)**
