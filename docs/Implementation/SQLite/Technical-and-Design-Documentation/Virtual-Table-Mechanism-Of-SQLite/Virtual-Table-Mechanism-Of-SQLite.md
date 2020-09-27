@@ -141,6 +141,22 @@ The `nRef` field is used internally by the SQLite core and should not be altered
 
 Before a [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) statement can be run, the module specified in that statement must be registered with the database connection. This is accomplished using either of the [sqlite3_create_module()](https://sqlite.org/c3ref/create_module.html) or [sqlite3_create_module_v2()](https://sqlite.org/c3ref/create_module.html) interfaces.
 
+```c
+int sqlite3_create_module(
+  sqlite3 *db,               /* SQLite connection to register module with */
+  const char *zName,         /* Name of the module */
+  const sqlite3_module *,    /* Methods for the module */
+  void *                     /* Client data for xCreate/xConnect */
+);
+int sqlite3_create_module_v2(
+  sqlite3 *db,               /* SQLite connection to register module with */
+  const char *zName,         /* Name of the module */
+  const sqlite3_module *,    /* Methods for the module */
+  void *,                    /* Client data for xCreate/xConnect */
+  void(*xDestroy)(void*)     /* Client data destructor function */
+);
+```
+
 
 
 ### 1.3. Virtual Tables And Shared Cache
@@ -149,6 +165,66 @@ Before a [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) stateme
 
 ### 1.4. Creating New Virtual Table Implementations
 
-
+> NOTE: virtual table module有两种实现方式:
+>
+> | 实现方式                                                     | 说明 |
+> | ------------------------------------------------------------ | ---- |
+> | [Run-Time Loadable Extensions](https://sqlite.org/loadext.html) |      |
+> | 和SQLite编译到一起                                           |      |
+>
+> 
 
 ## 2. Virtual Table Methods
+
+### 2.1. The `xCreate` Method
+
+```c++
+int (*xCreate)(sqlite3 *db, void *pAux,
+             int argc, char *const*argv,
+             sqlite3_vtab **ppVTab,
+             char **pzErr);
+```
+
+
+
+#### `argv`
+
+|                        | 是否必传 | 说明                                                         |
+| ---------------------- | -------- | ------------------------------------------------------------ |
+| `argv[0]`              | yes      | the name of the **module** being invoked                     |
+| `argv[1]`              | yes      | the name of the **database** in which the new **virtual table** is being created |
+| `argv[2]`              | yes      | the name of the new virtual table, as specified following the TABLE keyword in the [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) statement |
+| `argv[4]-argv[argc-1]` | no       | the fourth and subsequent strings in the argv[] array report the arguments to the module name in the [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) statement. |
+
+#### `ppVTab`
+
+The job of this method is to construct the new virtual table object (an [sqlite3_vtab](https://sqlite.org/c3ref/vtab.html) object) and return a pointer to it in `*ppVTab`.
+
+
+
+#### [sqlite3_declare_vtab()](https://sqlite.org/c3ref/declare_vtab.html)
+
+The second argument to [sqlite3_declare_vtab()](https://sqlite.org/c3ref/declare_vtab.html) must a zero-terminated UTF-8 string that contains a well-formed [CREATE TABLE](https://sqlite.org/lang_createtable.html) statement that defines the columns in the virtual table and their data types. The name of the table in this CREATE TABLE statement is ignored, as are all constraints. Only the column names and datatypes matter. The CREATE TABLE statement string need not to be held in persistent memory. The string can be deallocated and/or reused as soon as the [sqlite3_declare_vtab()](https://sqlite.org/c3ref/declare_vtab.html) routine returns.
+
+> NOTE: 参数`zCreateTable`是有谁来组织？
+
+
+
+If the xCreate method is the exact same pointer as the [xConnect](https://sqlite.org/vtab.html#xconnect) method, that indicates that the virtual table does not need to initialize backing store. Such a virtual table can be used as an [eponymous virtual table](https://sqlite.org/vtab.html#epovtab) or as a named virtual table using [CREATE VIRTUAL TABLE](https://sqlite.org/lang_createvtab.html) or both.
+
+> NOTE: backing store在2.2. The xConnect Method中也有所提及，并且其中进行了更加详细的说明
+
+### 2.1.1. Hidden columns in virtual tables
+
+
+
+### 2.1.2. Table-valued functions
+
+
+
+### 2.1.3. WITHOUT ROWID Virtual Tables
+
+
+
+### 2.2. The xConnect Method
+
