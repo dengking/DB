@@ -123,7 +123,21 @@ struct sqlite3_vtab {
 
 Virtual table implementations will normally **subclass** this structure to add additional private and implementation-specific fields. 
 
-> NOTE: 如何实现subclass？C中貌似没有subclass机制
+> NOTE: 如何实现subclass？C中貌似没有subclass机制；在File [ext/misc/csv.c](https://sqlite.org/src/finfo?name=ext/misc/csv.c&m=tip) from the [latest check-in](https://sqlite.org/src/info/tip)中给出了这样的一个例子:
+>
+> ```C
+> /* An instance of the CSV virtual table */
+> typedef struct CsvTable {
+>   sqlite3_vtab base;              /* Base class.  Must be first */
+>   char *zFilename;                /* Name of the CSV file */
+>   char *zData;                    /* Raw CSV data in lieu of zFilename */
+>   long iStart;                    /* Offset to start of data in zFilename */
+>   int nCol;                       /* Number of columns in the CSV file */
+>   unsigned int tstFlags;          /* Bit values used for testing */
+> } CsvTable;
+> ```
+>
+> 
 
 The `nRef` field is used internally by the SQLite core and should not be altered by the virtual table implementation. The virtual table implementation may pass error message text to the core by putting an error message string in `zErrMsg`. Space to hold this error message string must be obtained from an SQLite memory allocation function such as [sqlite3_mprintf()](https://sqlite.org/c3ref/mprintf.html) or [sqlite3_malloc()](https://sqlite.org/c3ref/free.html). Prior to assigning a new value to `zErrMsg`, the virtual table implementation must free any preexisting content of `zErrMsg` using [sqlite3_free()](https://sqlite.org/c3ref/free.html). Failure to do this will result in a memory leak.
 
@@ -135,7 +149,22 @@ The `nRef` field is used internally by the SQLite core and should not be altered
 
 > NOTE: [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) 其实相当于一个 pointer
 
+Once again, practical implementations will likely subclass this structure to add additional private fields.
 
+> NOTE:在File [ext/misc/csv.c](https://sqlite.org/src/finfo?name=ext/misc/csv.c&m=tip) from the [latest check-in](https://sqlite.org/src/info/tip)中给出了这样的一个例子:
+>
+> ```C
+> /* A cursor for the CSV virtual table */
+> typedef struct CsvCursor {
+>   sqlite3_vtab_cursor base;       /* Base class.  Must be first */
+>   CsvReader rdr;                  /* The CsvReader object */
+>   char **azVal;                   /* Value of the current row */
+>   int *aLen;                      /* Length of each entry */
+>   sqlite3_int64 iRowid;           /* The current rowid.  Negative for EOF */
+> } CsvCursor;
+> ```
+>
+> 
 
 ### Register module: `sqlite3_create_module`
 
