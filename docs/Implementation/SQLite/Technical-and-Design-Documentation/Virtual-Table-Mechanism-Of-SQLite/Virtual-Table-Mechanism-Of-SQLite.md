@@ -257,3 +257,14 @@ If the xCreate method is the exact same pointer as the [xConnect](https://sqlite
 
 ### 2.2. The xConnect Method
 
+
+
+### 2.3. The xBestIndex Method
+
+
+
+### 2.6. The xOpen Method
+
+```
+int (*xOpen)(sqlite3_vtab *pVTab, sqlite3_vtab_cursor **ppCursor);
+```
