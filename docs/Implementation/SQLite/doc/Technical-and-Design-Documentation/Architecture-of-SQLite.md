@@ -8,6 +8,12 @@ A nearby diagram shows the main components of SQLite and how they interoperate. 
 
 ![](./arch2.gif)
 
+> NOTE: 下面这种图是源自于[The SQLite OS Interface or "VFS"](https://sqlite.org/vfs.html)，它以层次化的结构展示了sqlite的architecture。
+
+![](./vfs1.gif)
+
+
+
 ## Overview
 
 SQLite works by compiling SQL text into [bytecode](https://www.sqlite.org/opcode.html), then running that bytecode using a virtual machine.
