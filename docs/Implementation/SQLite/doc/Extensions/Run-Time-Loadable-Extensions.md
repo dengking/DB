@@ -50,11 +50,13 @@ The default behavior for a loadable extension is that it is unloaded from proces
 
 However, if the initialization procedure returns [SQLITE_OK_LOAD_PERMANENTLY](https://sqlite.org/rescode.html#ok_load_permanently) instead of `SQLITE_OK`, then the extension will not be unloaded (`xDlClose` will not be invoked) and the extension will remain in process memory indefinitely. The `SQLITE_OK_LOAD_PERMANENTLY` return value is useful for extensions that want to register new [VFSes](https://sqlite.org/vfs.html).
 
-To clarify: an extension for which the initialization function returns `SQLITE_OK_LOAD_PERMANENTLY` continues to exist in memory after the database connection closes. However, the extension is *not* automatically registered with subsequent database connections. This makes it possible to load extensions that implement new [VFSes](https://sqlite.org/vfs.html). To persistently **load** and **register** an **extension** that implements new SQL functions, collating sequences, and/or virtual tables, such that those added capabilities are available to all subsequent database connections, then the initialization routine should also invoke [sqlite3_auto_extension()](https://sqlite.org/c3ref/auto_extension.html) on a subfunction that will register those services.
+To clarify: an extension for which the initialization function returns `SQLITE_OK_LOAD_PERMANENTLY` continues to exist in memory after the database connection closes. However, the extension is *not* automatically registered with subsequent database connections. This makes it possible to load extensions that implement new [VFSes](https://sqlite.org/vfs.html). To persistently **load** and **register** an **extension** that implements new **SQL functions**, collating sequences, and/or virtual tables, such that those added capabilities are available to all subsequent database connections, then the initialization routine should also invoke [sqlite3_auto_extension()](https://sqlite.org/c3ref/auto_extension.html) on a subfunction that will register those services.
 
-> NOTE:自动load、register特性非常重要
+> NOTE:自动load、register特性非常重要。
+>
+> 对于**SQL functions**，貌似它们必须要persistently **load** and **register**。
 
-The [vfsstat.c](https://sqlite.org/src/file/ext/misc/vfsstat.c) extension show an example of a loadable extension that persistently registers both a new VFS and a new virtual table. The [sqlite3_vfsstat_init()](https://sqlite.org/src/info/77b5b4235c9f7f11?ln=801-819) initialization routine in that extension is called only once, when the extension is first loaded. It registers the new "vfslog" VFS just that one time, and it returns SQLITE_OK_LOAD_PERMANENTLY so that the code used to implement the "vfslog" VFS will remain in memory. The initialization routine also invokes [sqlite3_auto_extension()](https://sqlite.org/c3ref/auto_extension.html) on a pointer to the "vstatRegister()" function so that all subsequent database connections will invoke the "vstatRegister()" function as they start up, and hence register the "vfsstat" virtual table.
+The [vfsstat.c](https://sqlite.org/src/file/ext/misc/vfsstat.c) extension show an example of a loadable extension that persistently registers both a new VFS and a new virtual table. The [sqlite3_vfsstat_init()](https://sqlite.org/src/info/77b5b4235c9f7f11?ln=801-819) initialization routine in that extension is called only once, when the extension is first loaded. It registers the new "vfslog" VFS just that one time, and it returns `SQLITE_OK_LOAD_PERMANENTLY` so that the code used to implement the "vfslog" VFS will remain in memory. The initialization routine also invokes [sqlite3_auto_extension()](https://sqlite.org/c3ref/auto_extension.html) on a pointer to the "`vstatRegister()`" function so that all subsequent database connections will invoke the "`vstatRegister()`" function as they start up, and hence register the "vfsstat" virtual table.
 
 
 
@@ -62,3 +64,8 @@ The [vfsstat.c](https://sqlite.org/src/file/ext/misc/vfsstat.c) extension show a
 
 
 
+## 7. Implementation Details
+
+SQLite implements run-time extension loading using the `xDlOpen()`, `xDlError()`, `xDlSym()`, and `xDlClose()` methods of the [sqlite3_vfs](https://sqlite.org/c3ref/vfs.html) object. These methods are implemented using the `dlopen()` library on unix (which explains why SQLite commonly need to be linked against the "`-ldl`" library on unix systems) and using `LoadLibrary()` API on Windows. In a custom [VFS](https://sqlite.org/vfs.html) for unusual systems, these methods can all be omitted, in which case the run-time extension loading mechanism will not work (though you will still be able to statically link the extension code, assuming the entry pointers are uniquely named). SQLite can be compiled with [SQLITE_OMIT_LOAD_EXTENSION](https://sqlite.org/compile.html#omit_load_extension) to omit the extension loading code from the build.
+
+> NOTE: 关于`dlopen`，参见工程Linux-OS的`Programming\Object-file\Shared-library`
