@@ -147,7 +147,7 @@ The `nRef` field is used internally by the SQLite core and should not be altered
 
 ### The [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) structure
 
-> NOTE: [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) 其实相当于一个 pointer
+> NOTE: [sqlite3_vtab_cursor](https://sqlite.org/c3ref/vtab_cursor.html) 其实相当于一个 pointer，这个结构非常重要，后续的很多操作都是在它的基础上完成的，在"2. Virtual Table Methods"章节中，会对此进行总结。
 
 Once again, practical implementations will likely subclass this structure to add additional private fields.
 
@@ -205,6 +205,47 @@ int sqlite3_create_module_v2(
 
 ## 2. Virtual Table Methods
 
+
+
+### Summary of methods
+
+> NOTE: 本段是我添加的，原文并没有
+
+
+
+| method      | explanation                                                  |          |
+| ----------- | ------------------------------------------------------------ | -------- |
+| xCreate     | [CREATE VIRTUAL TABLE](https://www.sqlite.org/lang_createvtab.html) |          |
+| xConnect    | establish a new connection to an existing virtual table      |          |
+| xBestIndex  | the best way to access the virtual table                     |          |
+| xDisconnect | destructor for a connection to the virtual table             |          |
+| xDestroy    | [DROP TABLE](https://www.sqlite.org/lang_droptable.html) statement |          |
+| xOpen       | creates a new **cursor** used for accessing (read and/or writing) a virtual table | required |
+| xClose      | closes a cursor previously opened by [xOpen](https://www.sqlite.org/vtab.html#xopen). |          |
+| xEof        |                                                              |          |
+| xFilter     | begins a search of a virtual table                           |          |
+| xNext       |                                                              |          |
+| xColumn     |                                                              | required |
+| xUpdate     | insert, delete, or update                                    |          |
+
+stack order: 一对相反的操作。
+
+
+
+操作cursor的method:
+
+都是required
+
+1) xOpen 复位cursor
+
+2) xClose
+
+3) xEof 判断是否到达末尾
+
+4) xFilter
+
+5) xNext 移动cursor
+
 ### 2.1. The `xCreate` Method
 
 ```c++
@@ -257,7 +298,7 @@ If the xCreate method is the exact same pointer as the [xConnect](https://sqlite
 
 ### 2.2. The xConnect Method
 
-
+The `xCreate` and `xConnect` methods are only different when the virtual table has some kind of backing store that must be initialized the first time the virtual table is created. The `xCreate` method creates and initializes the backing store. The `xConnect` method just connects to an existing backing store.
 
 ### 2.3. The xBestIndex Method
 
@@ -265,6 +306,30 @@ If the xCreate method is the exact same pointer as the [xConnect](https://sqlite
 
 ### 2.6. The xOpen Method
 
-```
+```c++
 int (*xOpen)(sqlite3_vtab *pVTab, sqlite3_vtab_cursor **ppCursor);
 ```
+
+> NOTE: 需要注意的是: `xOpen`的第二个参数`ppCursor`是一个二级指针，也就是说，需要由programmer来实现对它的allocation，为什么要这样做呢？有如下原因:
+>
+> - 在"1.2. Implementation"中，我们知道，`sqlite3_vtab_cursor`是允许subclass的，所以，为了能够支持user subclass，所以必须要由user来进行allocation
+
+
+
+
+
+### 2.9. The xFilter Method
+
+
+
+> NOTE:如何实现多条件过滤？
+
+### 2.11. The xColumn Method
+
+
+
+### 2.12. The xRowid Method
+
+> NOTE: 如何来实现？
+
+### 2.13. The xUpdate Method
