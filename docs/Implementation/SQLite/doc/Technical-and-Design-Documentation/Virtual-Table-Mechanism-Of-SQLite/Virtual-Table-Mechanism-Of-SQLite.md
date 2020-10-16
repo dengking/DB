@@ -228,6 +228,10 @@ int sqlite3_create_module_v2(
 | xColumn     |                                                              | required |
 | xUpdate     | insert, delete, or update                                    |          |
 
+
+
+
+
 stack order: 一对相反的操作。
 
 
