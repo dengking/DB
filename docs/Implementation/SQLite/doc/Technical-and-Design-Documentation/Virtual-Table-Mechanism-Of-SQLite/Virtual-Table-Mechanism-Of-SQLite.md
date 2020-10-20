@@ -306,6 +306,10 @@ The `xCreate` and `xConnect` methods are only different when the virtual table h
 
 ### 2.3. The xBestIndex Method
 
+The SQLite core calls the `xBestIndex` method when it is compiling a query that involves a **virtual table**. In other words, SQLite calls this method when it is running [sqlite3_prepare()](https://sqlite.org/c3ref/prepare.html) or the equivalent. By calling this method, the SQLite core is saying to the virtual table that it needs to access some subset of the rows in the virtual table and it wants to know the most efficient way to do that access. The `xBestIndex` method replies with information that the SQLite core can then use to conduct an efficient search of the virtual table.
+
+### 2.3.1. Inputs
+
 
 
 ### 2.6. The xOpen Method
