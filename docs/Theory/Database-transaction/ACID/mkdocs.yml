@@ -1,5 +1,7 @@
 nav:
     - Introduction: index.md
     - Atomicity: Atomicity
+    - Consistency(database-systems): Consistency(database-systems)    
     - Isolation: Isolation
+
     
