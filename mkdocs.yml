@@ -1,0 +1,37 @@
+edit_uri: ''
+extra_css:
+- css/extra.css
+google_analytics:
+- UA-27795084-5
+- mkdocs.org
+markdown_extensions:
+- toc:
+    permalink: '#'
+nav:
+- Implementation:
+  - SQLite:
+    - doc:
+      - Introduction: Implementation/SQLite/doc/index.md
+      - Technical-and-Design-Documentation:
+        - Architecture-of-SQLite: Implementation/SQLite/doc/Technical-and-Design-Documentation/Architecture-of-SQLite.md
+        - Virtual-Table-Mechanism-Of-SQLite:
+          - Virtual-Table-Mechanism-Of-SQLite: Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/index.md
+          - Example-CSV: Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV.md
+        - TODO: Implementation/SQLite/doc/Technical-and-Design-Documentation/TODO.md
+      - Extensions:
+        - Run-Time-Loadable-Extensions: Implementation/SQLite/doc/Extensions/Run-Time-Loadable-Extensions.md
+      - Programming-Interfaces:
+        - How-To-Compile-SQLite: Implementation/SQLite/doc/Programming-Interfaces/How-To-Compile-SQLite.md
+        - Setting-The-Result-Of-An-SQL-Function: Implementation/SQLite/doc/Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function.md
+  - SQL-compiler:
+    - Introduction: Implementation/SQL-compiler/index.md
+- Cursor: Cursor.md
+plugins:
+- search
+repo_url: https://github.com/dengking/Linux-OS
+site_author: DengKing
+site_description: Project documentation with Markdown.
+site_name: Linux-OS
+site_url: https://dengking.github.io/Linux-OS
+theme:
+  name: material
