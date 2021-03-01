@@ -29,6 +29,33 @@ markdown_extensions:
     custom_checkbox: true
 - pymdownx.tilde
 nav:
+- Theory:
+  - Database-transaction:
+    - Introduction:
+      - Introduction: Theory/Database-transaction/Transaction/index.md
+    - ACID:
+      - Introduction: Theory/Database-transaction/ACID/index.md
+      - Atomicity:
+        - Introduction: Theory/Database-transaction/ACID/Atomicity/index.md
+      - Consistency(database-systems):
+        - Introduction: Theory/Database-transaction/ACID/Consistency(database-systems)/index.md
+      - Isolation:
+        - Introduction: Theory/Database-transaction/ACID/Isolation/index.md
+        - Isolation-level:
+          - Introduction: Theory/Database-transaction/ACID/Isolation/Isolation-level/index.md
+    - Implementation:
+      - Atomic-commit:
+        - Introduction: Theory/Database-transaction/Implementation/Atomic-commit/index.md
+      - Two-phase-commit-protocol:
+        - Introduction: Theory/Database-transaction/Implementation/Two-phase-commit-protocol/index.md
+      - Three-phase-commit-protocol:
+        - Introduction: Theory/Database-transaction/Implementation/Three-phase-commit-protocol/index.md
+      - Serializability:
+        - Introduction: Theory/Database-transaction/Implementation/Serializability/index.md
+  - Concurrency-Control-in-DBMS:
+    - Introduction: Theory/Concurrency-Control-in-DBMS/index.md
+    - Problem:
+      - Introduction: Theory/Concurrency-Control-in-DBMS/Problem/index.md
 - Implementation:
   - SQLite:
     - doc:
