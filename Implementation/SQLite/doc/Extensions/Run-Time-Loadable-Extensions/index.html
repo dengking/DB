@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/Linux-OS/Implementation/SQLite/doc/Extensions/Run-Time-Loadable-Extensions/">
+        <link rel="canonical" href="https://dengking.github.io/DB/Implementation/SQLite/doc/Extensions/Run-Time-Loadable-Extensions/">
       
       <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>Run-Time-Loadable-Extensions - Linux-OS</title>
+        <title>Run-Time-Loadable-Extensions - DB</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#run-time-loadable-extensions" class="md-skip">
+        <a href="#run-time#loadable#extensions" class="md-skip">
           Skip to content
         </a>
       
@@ -83,7 +83,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-header__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-header__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -96,7 +96,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Linux-OS
+            DB
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -145,7 +145,7 @@
     
       <div class="md-header__source">
         
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -179,18 +179,18 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-nav__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-nav__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Linux-OS
+    DB
   </label>
   
     <div class="md-nav__source">
       
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -209,6 +209,558 @@
 
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Theory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1">
+        Database-transaction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Database-transaction" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Database-transaction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1">
+        Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Introduction" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Transaction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2" type="checkbox" id="__nav_1_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2">
+        ACID
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="ACID" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          ACID
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_2" type="checkbox" id="__nav_1_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_2">
+        Atomicity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomicity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atomicity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Atomicity/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_3" type="checkbox" id="__nav_1_1_2_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_3">
+        Consistency(database-systems)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Consistency(database-systems)" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Consistency(database-systems)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Consistency%28database-systems%29/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4" type="checkbox" id="__nav_1_1_2_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4">
+        Isolation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Isolation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4_2" type="checkbox" id="__nav_1_1_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4_2">
+        Isolation-level
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation-level" data-md-level="5">
+        <label class="md-nav__title" for="__nav_1_1_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation-level
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Isolation/Isolation-level/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3" type="checkbox" id="__nav_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_1" type="checkbox" id="__nav_1_1_3_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_1">
+        Atomic-commit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomic-commit" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Atomic-commit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Atomic-commit/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_2" type="checkbox" id="__nav_1_1_3_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_2">
+        Two-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Two-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Two-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Two-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_3" type="checkbox" id="__nav_1_1_3_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_3">
+        Three-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Three-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Three-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Three-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_4" type="checkbox" id="__nav_1_1_3_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_4">
+        Serializability
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Serializability" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Serializability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Serializability/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        Concurrency-Control-in-DBMS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Concurrency-Control-in-DBMS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Concurrency-Control-in-DBMS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Concurrency-Control-in-DBMS/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" type="checkbox" id="__nav_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2_2">
+        Problem
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Problem" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Problem
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Concurrency-Control-in-DBMS/Problem/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -216,14 +768,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
-      <label class="md-nav__link" for="__nav_1">
+      <label class="md-nav__link" for="__nav_2">
         Implementation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Implementation" data-md-level="1">
-        <label class="md-nav__title" for="__nav_1">
+        <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Implementation
         </label>
@@ -239,14 +791,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
       
-      <label class="md-nav__link" for="__nav_1_1">
+      <label class="md-nav__link" for="__nav_2_1">
         SQLite
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="SQLite" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_1">
+        <label class="md-nav__title" for="__nav_2_1">
           <span class="md-nav__icon md-icon"></span>
           SQLite
         </label>
@@ -262,14 +814,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" checked>
       
-      <label class="md-nav__link" for="__nav_1_1_1">
+      <label class="md-nav__link" for="__nav_2_1_1">
         doc
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="doc" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_1_1">
+        <label class="md-nav__title" for="__nav_2_1_1">
           <span class="md-nav__icon md-icon"></span>
           doc
         </label>
@@ -295,14 +847,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2" type="checkbox" id="__nav_1_1_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2" type="checkbox" id="__nav_2_1_1_2" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2">
         Technical-and-Design-Documentation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Technical-and-Design-Documentation" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2">
           <span class="md-nav__icon md-icon"></span>
           Technical-and-Design-Documentation
         </label>
@@ -328,14 +880,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2_2" type="checkbox" id="__nav_1_1_1_2_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2_2" type="checkbox" id="__nav_2_1_1_2_2" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_2_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2_2">
         Virtual-Table-Mechanism-Of-SQLite
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Virtual-Table-Mechanism-Of-SQLite" data-md-level="5">
-        <label class="md-nav__title" for="__nav_1_1_1_2_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2_2">
           <span class="md-nav__icon md-icon"></span>
           Virtual-Table-Mechanism-Of-SQLite
         </label>
@@ -399,14 +951,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_3" type="checkbox" id="__nav_1_1_1_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_3" type="checkbox" id="__nav_2_1_1_3" checked>
       
-      <label class="md-nav__link" for="__nav_1_1_1_3">
+      <label class="md-nav__link" for="__nav_2_1_1_3">
         Extensions
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Extensions" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_3">
+        <label class="md-nav__title" for="__nav_2_1_1_3">
           <span class="md-nav__icon md-icon"></span>
           Extensions
         </label>
@@ -448,49 +1000,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1#overview" class="md-nav__link">
     1. Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-loading-an-extension" class="md-nav__link">
+  <a href="#2#loading#an#extension" class="md-nav__link">
     2. Loading An Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-compiling-a-loadable-extension" class="md-nav__link">
+  <a href="#3#compiling#a#loadable#extension" class="md-nav__link">
     3. Compiling A Loadable Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-programming-loadable-extensions" class="md-nav__link">
+  <a href="#4#programming#loadable#extensions" class="md-nav__link">
     4. Programming Loadable Extensions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-persistent-loadable-extensions" class="md-nav__link">
+  <a href="#5#persistent#loadable#extensions" class="md-nav__link">
     5. Persistent Loadable Extensions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-statically-linking-a-run-time-loadable-extension" class="md-nav__link">
+  <a href="#6#statically#linking#a#run-time#loadable#extension" class="md-nav__link">
     6. Statically Linking A Run-Time Loadable Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-implementation-details" class="md-nav__link">
+  <a href="#7#implementation#details" class="md-nav__link">
     7. Implementation Details
   </a>
   
@@ -518,14 +1070,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_4" type="checkbox" id="__nav_1_1_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_4" type="checkbox" id="__nav_2_1_1_4" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_4">
+      <label class="md-nav__link" for="__nav_2_1_1_4">
         Programming-Interfaces
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Programming-Interfaces" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_4">
+        <label class="md-nav__title" for="__nav_2_1_1_4">
           <span class="md-nav__icon md-icon"></span>
           Programming-Interfaces
         </label>
@@ -581,14 +1133,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
       
-      <label class="md-nav__link" for="__nav_1_2">
+      <label class="md-nav__link" for="__nav_2_2">
         SQL-compiler
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="SQL-compiler" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_2">
+        <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           SQL-compiler
         </label>
@@ -658,49 +1210,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-overview" class="md-nav__link">
+  <a href="#1#overview" class="md-nav__link">
     1. Overview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-loading-an-extension" class="md-nav__link">
+  <a href="#2#loading#an#extension" class="md-nav__link">
     2. Loading An Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-compiling-a-loadable-extension" class="md-nav__link">
+  <a href="#3#compiling#a#loadable#extension" class="md-nav__link">
     3. Compiling A Loadable Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-programming-loadable-extensions" class="md-nav__link">
+  <a href="#4#programming#loadable#extensions" class="md-nav__link">
     4. Programming Loadable Extensions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-persistent-loadable-extensions" class="md-nav__link">
+  <a href="#5#persistent#loadable#extensions" class="md-nav__link">
     5. Persistent Loadable Extensions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-statically-linking-a-run-time-loadable-extension" class="md-nav__link">
+  <a href="#6#statically#linking#a#run-time#loadable#extension" class="md-nav__link">
     6. Statically Linking A Run-Time Loadable Extension
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-implementation-details" class="md-nav__link">
+  <a href="#7#implementation#details" class="md-nav__link">
     7. Implementation Details
   </a>
   
@@ -719,8 +1271,8 @@
               
                 
                 
-                <h1 id="run-time-loadable-extensions"><a href="https://sqlite.org/loadext.html">Run-Time Loadable Extensions</a><a class="headerlink" href="#run-time-loadable-extensions" title="Permanent link">#</a></h1>
-<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">#</a></h2>
+                <h1 id="run-time#loadable#extensions"><a href="https://sqlite.org/loadext.html">Run-Time Loadable Extensions</a></h1>
+<h2 id="1#overview">1. Overview</h2>
 <p>Extensions can also be <strong>statically linked</strong> with the application. The code template shown below will work just as well as a statically linked extension as it does as a run-time loadable extension except that you should give the <strong>entry point function</strong> ("<code>sqlite3_extension_init</code>") a different name to avoid name collisions if your application contains two or more extensions.</p>
 <blockquote>
 <p>NOTE: 上面这段话是什么意思？结合下面的内容来进行理解: sqlite是允许load多个extension的，每个extension都需要有一个entry point function，如果都指定为<code>sqlite3_extension_init</code>的话，则就导致name collision了。为了解决这个问题，sqlite采用了一定的命名方案: <code>sqlite3_X_init</code>，参见原文的"2. Loading An Extension"章节。</p>
@@ -728,39 +1280,39 @@
 <p>1) statically linked </p>
 <p>2) run-time load</p>
 </blockquote>
-<h2 id="2-loading-an-extension">2. Loading An Extension<a class="headerlink" href="#2-loading-an-extension" title="Permanent link">#</a></h2>
+<h2 id="2#loading#an#extension">2. Loading An Extension</h2>
 <blockquote>
 <p>NOTE: 本节介绍run-time load方法。下面是sqlite提供的方法: </p>
 <p>1) C: <a href="https://sqlite.org/c3ref/load_extension.html">sqlite3_load_extension()</a> </p>
 <p>2) SQL function: <a href="https://sqlite.org/lang_corefunc.html#load_extension">Load_extension(X,Y)</a></p>
 <p>3) <a href="https://sqlite.org/cli.html">command-line shell</a>, extensions can be loaded using the "<code>.load</code>" dot-command</p>
-<p>无论哪种方式，非常重要的是对<strong>entry point function</strong>的指定。其实也可以不指定，sqlite的默认寻找规则能够自动找到<strong>entry point function</strong>。</p>
+<p>无论哪种方式，非常重要的是对**entry point function**的指定。其实也可以不指定，sqlite的默认寻找规则能够自动找到**entry point function**。</p>
 </blockquote>
 <p>For security reasons, extension loading is turned off by default. In order to use either the C-language or SQL extension loading functions, one must first enable extension loading using the <a href="https://sqlite.org/c3ref/db_config.html">sqlite3_db_config</a>(db,<a href="https://sqlite.org/c3ref/c_dbconfig_defensive.html#sqlitedbconfigenableloadextension">SQLITE_DBCONFIG_ENABLE_LOAD_EXTENSION</a>,1,NULL) C-language API in your application.</p>
 <blockquote>
 <p>NOTE: 必须要首先开启才能够使用</p>
 </blockquote>
-<h2 id="3-compiling-a-loadable-extension">3. Compiling A Loadable Extension<a class="headerlink" href="#3-compiling-a-loadable-extension" title="Permanent link">#</a></h2>
-<pre><code class="language-C++">gcc -g -fPIC -shared YourCode.c -o YourCode.so
-</code></pre>
+<h2 id="3#compiling#a#loadable#extension">3. Compiling A Loadable Extension</h2>
+<div class="highlight"><pre><span></span><code><span class="n">gcc</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">fPIC</span> <span class="o">-</span><span class="n">shared</span> <span class="n">YourCode</span><span class="p">.</span><span class="n">c</span> <span class="o">-</span><span class="n">o</span> <span class="n">YourCode</span><span class="p">.</span><span class="n">so</span>
+</code></pre></div>
 <blockquote>
 <p>NOTE: 其实就是普通的编译so的方式</p>
 </blockquote>
-<h2 id="4-programming-loadable-extensions">4. Programming Loadable Extensions<a class="headerlink" href="#4-programming-loadable-extensions" title="Permanent link">#</a></h2>
+<h2 id="4#programming#loadable#extensions">4. Programming Loadable Extensions</h2>
 <blockquote>
 <p>NOTE: 不同的类型的extension使用不同的实现</p>
 </blockquote>
-<h2 id="5-persistent-loadable-extensions">5. Persistent Loadable Extensions<a class="headerlink" href="#5-persistent-loadable-extensions" title="Permanent link">#</a></h2>
+<h2 id="5#persistent#loadable#extensions">5. Persistent Loadable Extensions</h2>
 <p>The default behavior for a loadable extension is that it is unloaded from process memory when the <strong>database connection</strong> that originally invoked <a href="https://sqlite.org/c3ref/load_extension.html">sqlite3_load_extension()</a> closes.</p>
 <p>However, if the initialization procedure returns <a href="https://sqlite.org/rescode.html#ok_load_permanently">SQLITE_OK_LOAD_PERMANENTLY</a> instead of <code>SQLITE_OK</code>, then the extension will not be unloaded (<code>xDlClose</code> will not be invoked) and the extension will remain in process memory indefinitely. The <code>SQLITE_OK_LOAD_PERMANENTLY</code> return value is useful for extensions that want to register new <a href="https://sqlite.org/vfs.html">VFSes</a>.</p>
 <p>To clarify: an extension for which the initialization function returns <code>SQLITE_OK_LOAD_PERMANENTLY</code> continues to exist in memory after the database connection closes. However, the extension is <em>not</em> automatically registered with subsequent database connections. This makes it possible to load extensions that implement new <a href="https://sqlite.org/vfs.html">VFSes</a>. To persistently <strong>load</strong> and <strong>register</strong> an <strong>extension</strong> that implements new <strong>SQL functions</strong>, collating sequences, and/or virtual tables, such that those added capabilities are available to all subsequent database connections, then the initialization routine should also invoke <a href="https://sqlite.org/c3ref/auto_extension.html">sqlite3_auto_extension()</a> on a subfunction that will register those services.</p>
 <blockquote>
 <p>NOTE:自动load、register特性非常重要。</p>
-<p>对于<strong>SQL functions</strong>，貌似它们必须要persistently <strong>load</strong> and <strong>register</strong>。</p>
+<p>对于**SQL functions**，貌似它们必须要persistently <strong>load</strong> and <strong>register</strong>。</p>
 </blockquote>
 <p>The <a href="https://sqlite.org/src/file/ext/misc/vfsstat.c">vfsstat.c</a> extension show an example of a loadable extension that persistently registers both a new VFS and a new virtual table. The <a href="https://sqlite.org/src/info/77b5b4235c9f7f11?ln=801-819">sqlite3_vfsstat_init()</a> initialization routine in that extension is called only once, when the extension is first loaded. It registers the new "vfslog" VFS just that one time, and it returns <code>SQLITE_OK_LOAD_PERMANENTLY</code> so that the code used to implement the "vfslog" VFS will remain in memory. The initialization routine also invokes <a href="https://sqlite.org/c3ref/auto_extension.html">sqlite3_auto_extension()</a> on a pointer to the "<code>vstatRegister()</code>" function so that all subsequent database connections will invoke the "<code>vstatRegister()</code>" function as they start up, and hence register the "vfsstat" virtual table.</p>
-<h2 id="6-statically-linking-a-run-time-loadable-extension">6. Statically Linking A Run-Time Loadable Extension<a class="headerlink" href="#6-statically-linking-a-run-time-loadable-extension" title="Permanent link">#</a></h2>
-<h2 id="7-implementation-details">7. Implementation Details<a class="headerlink" href="#7-implementation-details" title="Permanent link">#</a></h2>
+<h2 id="6#statically#linking#a#run-time#loadable#extension">6. Statically Linking A Run-Time Loadable Extension</h2>
+<h2 id="7#implementation#details">7. Implementation Details</h2>
 <p>SQLite implements run-time extension loading using the <code>xDlOpen()</code>, <code>xDlError()</code>, <code>xDlSym()</code>, and <code>xDlClose()</code> methods of the <a href="https://sqlite.org/c3ref/vfs.html">sqlite3_vfs</a> object. These methods are implemented using the <code>dlopen()</code> library on unix (which explains why SQLite commonly need to be linked against the "<code>-ldl</code>" library on unix systems) and using <code>LoadLibrary()</code> API on Windows. In a custom <a href="https://sqlite.org/vfs.html">VFS</a> for unusual systems, these methods can all be omitted, in which case the run-time extension loading mechanism will not work (though you will still be able to statically link the extension code, assuming the entry pointers are uniquely named). SQLite can be compiled with <a href="https://sqlite.org/compile.html#omit_load_extension">SQLITE_OMIT_LOAD_EXTENSION</a> to omit the extension loading code from the build.</p>
 <blockquote>
 <p>NOTE: 关于<code>dlopen</code>，参见工程Linux-OS的<code>Programming\Object-file\Shared-library</code></p>
@@ -835,6 +1387,8 @@
     
     
       <script src="../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

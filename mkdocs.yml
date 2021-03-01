@@ -1,3 +1,4 @@
 nav:
+    - Theory: Theory
     - Implementation: Implementation
     - Cursor: Cursor.md

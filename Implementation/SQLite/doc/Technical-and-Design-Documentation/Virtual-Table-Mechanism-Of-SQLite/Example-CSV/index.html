@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/Linux-OS/Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV/">
+        <link rel="canonical" href="https://dengking.github.io/DB/Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV/">
       
       <link rel="shortcut icon" href="../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>Example-CSV - Linux-OS</title>
+        <title>Example-CSV - DB</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#example-csv" class="md-skip">
+        <a href="#example#csv" class="md-skip">
           Skip to content
         </a>
       
@@ -83,7 +83,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-header__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-header__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -96,7 +96,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Linux-OS
+            DB
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -145,7 +145,7 @@
     
       <div class="md-header__source">
         
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -179,18 +179,18 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-nav__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-nav__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Linux-OS
+    DB
   </label>
   
     <div class="md-nav__source">
       
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -209,6 +209,558 @@
 
   
   
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Theory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1">
+        Database-transaction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Database-transaction" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Database-transaction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1">
+        Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Introduction" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/Transaction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2" type="checkbox" id="__nav_1_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2">
+        ACID
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="ACID" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          ACID
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/ACID/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_2" type="checkbox" id="__nav_1_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_2">
+        Atomicity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomicity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atomicity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/ACID/Atomicity/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_3" type="checkbox" id="__nav_1_1_2_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_3">
+        Consistency(database-systems)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Consistency(database-systems)" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Consistency(database-systems)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/ACID/Consistency%28database-systems%29/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4" type="checkbox" id="__nav_1_1_2_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4">
+        Isolation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/ACID/Isolation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4_2" type="checkbox" id="__nav_1_1_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4_2">
+        Isolation-level
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation-level" data-md-level="5">
+        <label class="md-nav__title" for="__nav_1_1_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation-level
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/ACID/Isolation/Isolation-level/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3" type="checkbox" id="__nav_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_1" type="checkbox" id="__nav_1_1_3_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_1">
+        Atomic-commit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomic-commit" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Atomic-commit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/Implementation/Atomic-commit/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_2" type="checkbox" id="__nav_1_1_3_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_2">
+        Two-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Two-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Two-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/Implementation/Two-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_3" type="checkbox" id="__nav_1_1_3_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_3">
+        Three-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Three-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Three-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/Implementation/Three-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_4" type="checkbox" id="__nav_1_1_3_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_4">
+        Serializability
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Serializability" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Serializability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Database-transaction/Implementation/Serializability/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        Concurrency-Control-in-DBMS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Concurrency-Control-in-DBMS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Concurrency-Control-in-DBMS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Concurrency-Control-in-DBMS/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" type="checkbox" id="__nav_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2_2">
+        Problem
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Problem" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Problem
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Theory/Concurrency-Control-in-DBMS/Problem/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -216,14 +768,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
-      <label class="md-nav__link" for="__nav_1">
+      <label class="md-nav__link" for="__nav_2">
         Implementation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Implementation" data-md-level="1">
-        <label class="md-nav__title" for="__nav_1">
+        <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Implementation
         </label>
@@ -239,14 +791,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
       
-      <label class="md-nav__link" for="__nav_1_1">
+      <label class="md-nav__link" for="__nav_2_1">
         SQLite
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="SQLite" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_1">
+        <label class="md-nav__title" for="__nav_2_1">
           <span class="md-nav__icon md-icon"></span>
           SQLite
         </label>
@@ -262,14 +814,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" checked>
       
-      <label class="md-nav__link" for="__nav_1_1_1">
+      <label class="md-nav__link" for="__nav_2_1_1">
         doc
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="doc" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_1_1">
+        <label class="md-nav__title" for="__nav_2_1_1">
           <span class="md-nav__icon md-icon"></span>
           doc
         </label>
@@ -297,14 +849,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2" type="checkbox" id="__nav_1_1_1_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2" type="checkbox" id="__nav_2_1_1_2" checked>
       
-      <label class="md-nav__link" for="__nav_1_1_1_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2">
         Technical-and-Design-Documentation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Technical-and-Design-Documentation" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2">
           <span class="md-nav__icon md-icon"></span>
           Technical-and-Design-Documentation
         </label>
@@ -332,14 +884,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2_2" type="checkbox" id="__nav_1_1_1_2_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2_2" type="checkbox" id="__nav_2_1_1_2_2" checked>
       
-      <label class="md-nav__link" for="__nav_1_1_1_2_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2_2">
         Virtual-Table-Mechanism-Of-SQLite
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Virtual-Table-Mechanism-Of-SQLite" data-md-level="5">
-        <label class="md-nav__title" for="__nav_1_1_1_2_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2_2">
           <span class="md-nav__icon md-icon"></span>
           Virtual-Table-Mechanism-Of-SQLite
         </label>
@@ -414,21 +966,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#xcreate-and-xconnect" class="md-nav__link">
+  <a href="#xcreate#and#xconnect" class="md-nav__link">
     xCreate and xConnect
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#virtual-table-struct-csvtable" class="md-nav__link">
+  <a href="#virtual#table#struct#csvtable" class="md-nav__link">
     Virtual table struct: CsvTable
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#virtual-table-cursor-struct-csvcursor" class="md-nav__link">
+  <a href="#virtual#table#cursor#struct#csvcursor" class="md-nav__link">
     Virtual table cursor struct: CsvCursor
   </a>
   
@@ -481,14 +1033,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_3" type="checkbox" id="__nav_1_1_1_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_3" type="checkbox" id="__nav_2_1_1_3" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_3">
+      <label class="md-nav__link" for="__nav_2_1_1_3">
         Extensions
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Extensions" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_3">
+        <label class="md-nav__title" for="__nav_2_1_1_3">
           <span class="md-nav__icon md-icon"></span>
           Extensions
         </label>
@@ -520,14 +1072,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_4" type="checkbox" id="__nav_1_1_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_4" type="checkbox" id="__nav_2_1_1_4" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_4">
+      <label class="md-nav__link" for="__nav_2_1_1_4">
         Programming-Interfaces
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Programming-Interfaces" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_4">
+        <label class="md-nav__title" for="__nav_2_1_1_4">
           <span class="md-nav__icon md-icon"></span>
           Programming-Interfaces
         </label>
@@ -583,14 +1135,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
       
-      <label class="md-nav__link" for="__nav_1_2">
+      <label class="md-nav__link" for="__nav_2_2">
         SQL-compiler
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="SQL-compiler" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_2">
+        <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           SQL-compiler
         </label>
@@ -681,21 +1233,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#xcreate-and-xconnect" class="md-nav__link">
+  <a href="#xcreate#and#xconnect" class="md-nav__link">
     xCreate and xConnect
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#virtual-table-struct-csvtable" class="md-nav__link">
+  <a href="#virtual#table#struct#csvtable" class="md-nav__link">
     Virtual table struct: CsvTable
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#virtual-table-cursor-struct-csvcursor" class="md-nav__link">
+  <a href="#virtual#table#cursor#struct#csvcursor" class="md-nav__link">
     Virtual table cursor struct: CsvCursor
   </a>
   
@@ -721,26 +1273,26 @@
               
                 
                 
-                <h1 id="example-csv">Example CSV<a class="headerlink" href="#example-csv" title="Permanent link">#</a></h1>
+                <h1 id="example#csv">Example CSV</h1>
 <p>本文是阅读<a href="https://sqlite.org/src/finfo?name=ext/misc/csv.c&amp;m=tip">ext/misc/csv.c</a> from the <a href="https://sqlite.org/src/info/tip">latest check-in</a>的笔记。</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
+<h2 id="usage">Usage</h2>
 <blockquote>
 <p>NOTE: 源代码中，头部给出的注释中说明的usage如下：</p>
 </blockquote>
-<pre><code class="language-sql">.load ./csv # 加载extension
-CREATE VIRTUAL TABLE temp.csv USING csv(filename=FILENAME);
-SELECT * FROM csv;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="k">load</span> <span class="p">.</span><span class="o">/</span><span class="n">csv</span> <span class="o">#</span> <span class="err">加载</span><span class="n">extension</span>
+<span class="k">CREATE</span> <span class="n">VIRTUAL</span> <span class="k">TABLE</span> <span class="n">temp</span><span class="p">.</span><span class="n">csv</span> <span class="k">USING</span> <span class="n">csv</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">FILENAME</span><span class="p">);</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">csv</span><span class="p">;</span>
+</code></pre></div>
 <blockquote>
 <p>NOTE: 我第一次错误的将<code>temp.csv</code>理解为<code>table-name</code>，但是<code>SELECT</code>语句中的<code>table-name</code>为<code>csv</code>，显然与前面的矛盾。后来查看了<a href="https://sqlite.org/vtab.html">1.1. Usage</a>方知: <code>temp.csv</code>为<code>schema-name.table-name</code>。</p>
 </blockquote>
 <p>The columns are named "c1", "c2", "c3", ... by default.  Or the application can define its own CREATE TABLE statement using the
 <code>schema= parameter</code>, like this:</p>
-<pre><code class="language-SQL">   CREATE VIRTUAL TABLE temp.csv2 USING csv(
-      filename = &quot;../http.log&quot;,
-      schema = &quot;CREATE TABLE x(date,ipaddr,url,referrer,userAgent)&quot;
-   );
-</code></pre>
+<div class="highlight"><pre><span></span><code>   <span class="k">CREATE</span> <span class="n">VIRTUAL</span> <span class="k">TABLE</span> <span class="n">temp</span><span class="p">.</span><span class="n">csv2</span> <span class="k">USING</span> <span class="n">csv</span><span class="p">(</span>
+      <span class="n">filename</span> <span class="o">=</span> <span class="ss">&quot;../http.log&quot;</span><span class="p">,</span>
+      <span class="k">schema</span> <span class="o">=</span> <span class="ss">&quot;CREATE TABLE x(date,ipaddr,url,referrer,userAgent)&quot;</span>
+   <span class="p">);</span>
+</code></pre></div>
 <blockquote>
 <p>NOTE: 上面的描述是想告诉我们，可以通过<code>schema= parameter</code>来自定义table的column。</p>
 </blockquote>
@@ -752,13 +1304,13 @@ SELECT * FROM csv;
 <blockquote>
 <p>NOTE: 理解usage非常重要，<code>csvtabConnect</code>就是基于它实现的。</p>
 </blockquote>
-<h2 id="_1">实现方式<a class="headerlink" href="#_1" title="Permanent link">#</a></h2>
+<h2 id="_1">实现方式</h2>
 <p>采用的是<a href="https://sqlite.org/loadext.html">Run-Time Loadable Extensions</a>，因为它的头文件包含了:</p>
-<pre><code class="language-C++">#include &lt;sqlite3ext.h&gt;
-</code></pre>
-<h2 id="sqlite3_module"><code>sqlite3_module</code><a class="headerlink" href="#sqlite3_module" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;sqlite3ext.h&gt;</span><span class="cp"></span>
+</code></pre></div>
+<h2 id="sqlite3_module"><code>sqlite3_module</code></h2>
 <p>它的<code>sqlite3_module</code>是<code>CsvModule</code></p>
-<h2 id="xcreate-and-xconnect"><code>xCreate</code> and <code>xConnect</code><a class="headerlink" href="#xcreate-and-xconnect" title="Permanent link">#</a></h2>
+<h2 id="xcreate#and#xconnect"><code>xCreate</code> and <code>xConnect</code></h2>
 <table>
 <thead>
 <tr>
@@ -778,18 +1330,18 @@ SELECT * FROM csv;
 </tbody>
 </table>
 <p>需要注意的是，"The xConnect and xCreate methods do the same thing, but they must be different so that the virtual table is not an eponymous virtual table"，查看其实现可知，<code>csvtabCreate</code>直接调用的<code>csvtabConnect</code>，关于这样做的原因，在<a href="https://sqlite.org/vtab.html">2.2. The xConnect Method</a>中进行了详细介绍。</p>
-<h2 id="virtual-table-struct-csvtable">Virtual table struct: <code>CsvTable</code><a class="headerlink" href="#virtual-table-struct-csvtable" title="Permanent link">#</a></h2>
+<h2 id="virtual#table#struct#csvtable">Virtual table struct: <code>CsvTable</code></h2>
 <p>在1.2. Implementation中说明:"Virtual table implementations will normally <strong>subclass</strong> this structure to add additional private and implementation-specific fields"，在本实现中，就是按照这种方式做的:</p>
-<pre><code class="language-C">/* An instance of the CSV virtual table */
-typedef struct CsvTable {
-  sqlite3_vtab base;              /* Base class.  Must be first */
-  char *zFilename;                /* Name of the CSV file */
-  char *zData;                    /* Raw CSV data in lieu of zFilename */
-  long iStart;                    /* Offset to start of data in zFilename */
-  int nCol;                       /* Number of columns in the CSV file */
-  unsigned int tstFlags;          /* Bit values used for testing */
-} CsvTable;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/* An instance of the CSV virtual table */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">CsvTable</span> <span class="p">{</span>
+  <span class="n">sqlite3_vtab</span> <span class="n">base</span><span class="p">;</span>              <span class="cm">/* Base class.  Must be first */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zFilename</span><span class="p">;</span>                <span class="cm">/* Name of the CSV file */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zData</span><span class="p">;</span>                    <span class="cm">/* Raw CSV data in lieu of zFilename */</span>
+  <span class="kt">long</span> <span class="n">iStart</span><span class="p">;</span>                    <span class="cm">/* Offset to start of data in zFilename */</span>
+  <span class="kt">int</span> <span class="n">nCol</span><span class="p">;</span>                       <span class="cm">/* Number of columns in the CSV file */</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tstFlags</span><span class="p">;</span>          <span class="cm">/* Bit values used for testing */</span>
+<span class="p">}</span> <span class="n">CsvTable</span><span class="p">;</span>
+</code></pre></div>
 <p>需要对成员变量<code>zFilename</code>和<code>zData</code>进行特殊说明:</p>
 <p>在"Usage"章节中，我们知道"Instead of specifying a file, the text of the CSV can be loaded using the <code>data= parameter</code>"，也就是说：可以通过file name来指定CSV数据，也可以通过<code>data= parameter</code>的方式来指定CSV数据，注释"Raw CSV data in lieu of zFilename"的意思是：原始CSV数据代替zFilename，也就是说:</p>
 <table>
@@ -810,35 +1362,35 @@ typedef struct CsvTable {
 </tr>
 </tbody>
 </table>
-<h2 id="virtual-table-cursor-struct-csvcursor">Virtual table cursor struct: <code>CsvCursor</code><a class="headerlink" href="#virtual-table-cursor-struct-csvcursor" title="Permanent link">#</a></h2>
+<h2 id="virtual#table#cursor#struct#csvcursor">Virtual table cursor struct: <code>CsvCursor</code></h2>
 <p>在1.2. Implementation中说明:"practical implementations will likely subclass this structure to add additional private fields."，在本实现中，就是按照这种方式做的:</p>
-<pre><code class="language-C">/* A cursor for the CSV virtual table */
-typedef struct CsvCursor {
-  sqlite3_vtab_cursor base;       /* Base class.  Must be first */
-  CsvReader rdr;                  /* The CsvReader object */
-  char **azVal;                   /* Value of the current row */
-  int *aLen;                      /* Length of each entry */
-  sqlite3_int64 iRowid;           /* The current rowid.  Negative for EOF */
-} CsvCursor;
-</code></pre>
-<h2 id="csvreader"><code>CsvReader</code><a class="headerlink" href="#csvreader" title="Permanent link">#</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cm">/* A cursor for the CSV virtual table */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">CsvCursor</span> <span class="p">{</span>
+  <span class="n">sqlite3_vtab_cursor</span> <span class="n">base</span><span class="p">;</span>       <span class="cm">/* Base class.  Must be first */</span>
+  <span class="n">CsvReader</span> <span class="n">rdr</span><span class="p">;</span>                  <span class="cm">/* The CsvReader object */</span>
+  <span class="kt">char</span> <span class="o">**</span><span class="n">azVal</span><span class="p">;</span>                   <span class="cm">/* Value of the current row */</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">aLen</span><span class="p">;</span>                      <span class="cm">/* Length of each entry */</span>
+  <span class="n">sqlite3_int64</span> <span class="n">iRowid</span><span class="p">;</span>           <span class="cm">/* The current rowid.  Negative for EOF */</span>
+<span class="p">}</span> <span class="n">CsvCursor</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="csvreader"><code>CsvReader</code></h2>
 <p>封装的csv file</p>
-<pre><code class="language-c++">/* A context object used when read a CSV file. */
-typedef struct CsvReader CsvReader;
-struct CsvReader {
-  FILE *in;              /* Read the CSV text from this input stream */
-  char *z;               /* Accumulated text for a field */
-  int n;                 /* Number of bytes in z */
-  int nAlloc;            /* Space allocated for z[] */
-  int nLine;             /* Current line number */
-  int bNotFirst;         /* True if prior text has been seen */
-  int cTerm;             /* Character that terminated the most recent field */
-  size_t iIn;            /* Next unread character in the input buffer */
-  size_t nIn;            /* Number of characters in the input buffer */
-  char *zIn;             /* The input buffer */
-  char zErr[CSV_MXERR];  /* Error message */
-};
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/* A context object used when read a CSV file. */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">CsvReader</span> <span class="n">CsvReader</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">CsvReader</span> <span class="p">{</span>
+  <span class="kt">FILE</span> <span class="o">*</span><span class="n">in</span><span class="p">;</span>              <span class="cm">/* Read the CSV text from this input stream */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">z</span><span class="p">;</span>               <span class="cm">/* Accumulated text for a field */</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>                 <span class="cm">/* Number of bytes in z */</span>
+  <span class="kt">int</span> <span class="n">nAlloc</span><span class="p">;</span>            <span class="cm">/* Space allocated for z[] */</span>
+  <span class="kt">int</span> <span class="n">nLine</span><span class="p">;</span>             <span class="cm">/* Current line number */</span>
+  <span class="kt">int</span> <span class="n">bNotFirst</span><span class="p">;</span>         <span class="cm">/* True if prior text has been seen */</span>
+  <span class="kt">int</span> <span class="n">cTerm</span><span class="p">;</span>             <span class="cm">/* Character that terminated the most recent field */</span>
+  <span class="kt">size_t</span> <span class="n">iIn</span><span class="p">;</span>            <span class="cm">/* Next unread character in the input buffer */</span>
+  <span class="kt">size_t</span> <span class="n">nIn</span><span class="p">;</span>            <span class="cm">/* Number of characters in the input buffer */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zIn</span><span class="p">;</span>             <span class="cm">/* The input buffer */</span>
+  <span class="kt">char</span> <span class="n">zErr</span><span class="p">[</span><span class="n">CSV_MXERR</span><span class="p">];</span>  <span class="cm">/* Error message */</span>
+<span class="p">};</span>
+</code></pre></div>
                 
               
               
@@ -909,6 +1461,8 @@ struct CsvReader {
     
     
       <script src="../../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

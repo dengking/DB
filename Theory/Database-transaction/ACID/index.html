@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/Linux-OS/Theory/Database-transaction/ACID/">
+        <link rel="canonical" href="https://dengking.github.io/DB/Theory/Database-transaction/ACID/">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>ACID - Linux-OS</title>
+        <title>Introduction - DB</title>
       
     
     
@@ -83,7 +83,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-header__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-header__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -96,13 +96,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Linux-OS
+            DB
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ACID
+              Introduction
             
           </span>
         </div>
@@ -145,7 +145,7 @@
     
       <div class="md-header__source">
         
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -179,18 +179,18 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-nav__button md-logo" aria-label="Linux-OS">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-nav__button md-logo" aria-label="DB">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Linux-OS
+    DB
   </label>
   
     <div class="md-nav__source">
       
-<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -209,42 +209,46 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
       
       <label class="md-nav__link" for="__nav_1">
-        Implementation
+        Theory
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
-          Implementation
+          Theory
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" checked>
       
       <label class="md-nav__link" for="__nav_1_1">
-        SQLite
+        Database-transaction
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="SQLite" data-md-level="2">
+      <nav class="md-nav" aria-label="Database-transaction" data-md-level="2">
         <label class="md-nav__title" for="__nav_1_1">
           <span class="md-nav__icon md-icon"></span>
-          SQLite
+          Database-transaction
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -259,11 +263,685 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" >
       
       <label class="md-nav__link" for="__nav_1_1_1">
+        Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Introduction" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Transaction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2" type="checkbox" id="__nav_1_1_2" checked>
+      
+      <label class="md-nav__link" for="__nav_1_1_2">
+        ACID
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="ACID" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          ACID
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Introduction
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cnblogs" class="md-nav__link">
+    cnblogs 数据库事务的四大特性以及事务的隔离级别
+  </a>
+  
+    <nav class="md-nav" aria-label="cnblogs 数据库事务的四大特性以及事务的隔离级别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1#atomicity" class="md-nav__link">
+    ⑴ 原子性（Atomicity）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2#consistency" class="md-nav__link">
+    ⑵ 一致性（Consistency）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3#isolation" class="md-nav__link">
+    ⑶ 隔离性（Isolation）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4#durability" class="md-nav__link">
+    ⑷ 持久性（Durability）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    Problem
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1，脏读
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2，不可重复读
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3，虚读(幻读)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolation#level" class="md-nav__link">
+    Isolation level
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wikipedia#acid" class="md-nav__link">
+    wikipedia ACID
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_2" type="checkbox" id="__nav_1_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_2">
+        Atomicity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomicity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atomicity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Atomicity/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_3" type="checkbox" id="__nav_1_1_2_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_3">
+        Consistency(database-systems)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Consistency(database-systems)" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Consistency(database-systems)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Consistency%28database-systems%29/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4" type="checkbox" id="__nav_1_1_2_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4">
+        Isolation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Isolation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2_4_2" type="checkbox" id="__nav_1_1_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2_4_2">
+        Isolation-level
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation-level" data-md-level="5">
+        <label class="md-nav__title" for="__nav_1_1_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation-level
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Isolation/Isolation-level/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3" type="checkbox" id="__nav_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_1" type="checkbox" id="__nav_1_1_3_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_1">
+        Atomic-commit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomic-commit" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Atomic-commit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/Atomic-commit/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_2" type="checkbox" id="__nav_1_1_3_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_2">
+        Two-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Two-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Two-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/Two-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_3" type="checkbox" id="__nav_1_1_3_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_3">
+        Three-phase-commit-protocol
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Three-phase-commit-protocol" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Three-phase-commit-protocol
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/Three-phase-commit-protocol/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_4" type="checkbox" id="__nav_1_1_3_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_4">
+        Serializability
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Serializability" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Serializability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Implementation/Serializability/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        Concurrency-Control-in-DBMS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Concurrency-Control-in-DBMS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Concurrency-Control-in-DBMS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Concurrency-Control-in-DBMS/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" type="checkbox" id="__nav_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2_2">
+        Problem
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Problem" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Problem
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Concurrency-Control-in-DBMS/Problem/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        SQLite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQLite" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          SQLite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1_1">
         doc
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="doc" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_1_1">
+        <label class="md-nav__title" for="__nav_2_1_1">
           <span class="md-nav__icon md-icon"></span>
           doc
         </label>
@@ -289,14 +967,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2" type="checkbox" id="__nav_1_1_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2" type="checkbox" id="__nav_2_1_1_2" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2">
         Technical-and-Design-Documentation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Technical-and-Design-Documentation" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2">
           <span class="md-nav__icon md-icon"></span>
           Technical-and-Design-Documentation
         </label>
@@ -322,14 +1000,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2_2" type="checkbox" id="__nav_1_1_1_2_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_2_2" type="checkbox" id="__nav_2_1_1_2_2" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_2_2">
+      <label class="md-nav__link" for="__nav_2_1_1_2_2">
         Virtual-Table-Mechanism-Of-SQLite
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Virtual-Table-Mechanism-Of-SQLite" data-md-level="5">
-        <label class="md-nav__title" for="__nav_1_1_1_2_2">
+        <label class="md-nav__title" for="__nav_2_1_1_2_2">
           <span class="md-nav__icon md-icon"></span>
           Virtual-Table-Mechanism-Of-SQLite
         </label>
@@ -391,14 +1069,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_3" type="checkbox" id="__nav_1_1_1_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_3" type="checkbox" id="__nav_2_1_1_3" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_3">
+      <label class="md-nav__link" for="__nav_2_1_1_3">
         Extensions
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Extensions" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_3">
+        <label class="md-nav__title" for="__nav_2_1_1_3">
           <span class="md-nav__icon md-icon"></span>
           Extensions
         </label>
@@ -430,14 +1108,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_4" type="checkbox" id="__nav_1_1_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1_4" type="checkbox" id="__nav_2_1_1_4" >
       
-      <label class="md-nav__link" for="__nav_1_1_1_4">
+      <label class="md-nav__link" for="__nav_2_1_1_4">
         Programming-Interfaces
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Programming-Interfaces" data-md-level="4">
-        <label class="md-nav__title" for="__nav_1_1_1_4">
+        <label class="md-nav__title" for="__nav_2_1_1_4">
           <span class="md-nav__icon md-icon"></span>
           Programming-Interfaces
         </label>
@@ -493,14 +1171,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
       
-      <label class="md-nav__link" for="__nav_1_2">
+      <label class="md-nav__link" for="__nav_2_2">
         SQL-compiler
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="SQL-compiler" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_2">
+        <label class="md-nav__title" for="__nav_2_2">
           <span class="md-nav__icon md-icon"></span>
           SQL-compiler
         </label>
@@ -578,28 +1256,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-atomicity" class="md-nav__link">
+  <a href="#1#atomicity" class="md-nav__link">
     ⑴ 原子性（Atomicity）
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-consistency" class="md-nav__link">
+  <a href="#2#consistency" class="md-nav__link">
     ⑵ 一致性（Consistency）
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-isolation" class="md-nav__link">
+  <a href="#3#isolation" class="md-nav__link">
     ⑶ 隔离性（Isolation）
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-durability" class="md-nav__link">
+  <a href="#4#durability" class="md-nav__link">
     ⑷ 持久性（Durability）
   </a>
   
@@ -640,7 +1318,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#isolation-level" class="md-nav__link">
+  <a href="#isolation#level" class="md-nav__link">
     Isolation level
   </a>
   
@@ -652,7 +1330,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wikipedia-acid" class="md-nav__link">
+  <a href="#wikipedia#acid" class="md-nav__link">
     wikipedia ACID
   </a>
   
@@ -671,45 +1349,45 @@
               
                 
                 
-                <h1 id="acid">ACID<a class="headerlink" href="#acid" title="Permanent link">#</a></h1>
+                <h1 id="acid">ACID</h1>
 <p>需要注意的是，只有DB transaction才具备ACID特性，其他的transaction不一定具备ACID特性。</p>
-<h2 id="cnblogs">cnblogs <a href="https://www.cnblogs.com/fjdingsd/p/5273008.html">数据库事务的四大特性以及事务的隔离级别</a><a class="headerlink" href="#cnblogs" title="Permanent link">#</a></h2>
+<h2 id="cnblogs">cnblogs <a href="https://www.cnblogs.com/fjdingsd/p/5273008.html">数据库事务的四大特性以及事务的隔离级别</a></h2>
 <p>本篇讲诉数据库中事务的四大特性（ACID），并且将会详细地说明事务的隔离级别。</p>
 <p>如果一个数据库声称支持事务的操作，那么该数据库必须要具备以下四个特性：</p>
-<h3 id="1-atomicity">⑴ 原子性（Atomicity）<a class="headerlink" href="#1-atomicity" title="Permanent link">#</a></h3>
+<h3 id="1#atomicity">⑴ 原子性（Atomicity）</h3>
 <p>原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚，这和前面两篇博客介绍事务的功能是一样的概念，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。</p>
-<h3 id="2-consistency">⑵ 一致性（Consistency）<a class="headerlink" href="#2-consistency" title="Permanent link">#</a></h3>
+<h3 id="2#consistency">⑵ 一致性（Consistency）</h3>
 <p>一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。</p>
 <p>拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。</p>
-<h3 id="3-isolation">⑶ 隔离性（Isolation）<a class="headerlink" href="#3-isolation" title="Permanent link">#</a></h3>
-<p><strong>隔离性</strong>是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互<strong>隔离</strong>。</p>
+<h3 id="3#isolation">⑶ 隔离性（Isolation）</h3>
+<p><strong>隔离性**是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互**隔离</strong>。</p>
 <p>即要达到这么一种效果：对于任意两个并发的事务T1和T2，在事务T1看来，T2要么在T1开始之前就已经结束，要么在T1结束之后才开始，这样每个事务都感觉不到有其他事务在并发地执行。</p>
 <p>关于事务的隔离性数据库提供了多种隔离级别，稍后会介绍到。</p>
 <blockquote>
 <p>NOTE: 参见文章level</p>
 </blockquote>
-<h3 id="4-durability">⑷ 持久性（Durability）<a class="headerlink" href="#4-durability" title="Permanent link">#</a></h3>
+<h3 id="4#durability">⑷ 持久性（Durability）</h3>
 <p>持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</p>
 <p>例如我们在使用JDBC操作数据库时，在提交事务方法后，提示用户事务操作完成，当我们程序执行完成直到看到提示后，就可以认定事务以及正确提交，即使这时候数据库出现了问题，也必须要将我们的事务完全执行完成，否则就会造成我们看到提示事务处理完毕，但是数据库因为故障而没有执行事务的重大错误。</p>
-<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">#</a></h3>
-<p>以上介绍完事务的四大特性(简称ACID)，现在重点来说明下事务的<strong>隔离性</strong>，当多个线程都开启事务操作数据库中的数据时，数据库系统要能进行隔离操作，以保证各个线程获取数据的准确性，在介绍数据库提供的各种<strong>隔离级别</strong>之前，我们先看看如果不考虑事务的<strong>隔离性</strong>，会发生的几种问题：</p>
-<h4 id="1">1，脏读<a class="headerlink" href="#1" title="Permanent link">#</a></h4>
+<h3 id="problem">Problem</h3>
+<p>以上介绍完事务的四大特性(简称ACID)，现在重点来说明下事务的**隔离性**，当多个线程都开启事务操作数据库中的数据时，数据库系统要能进行隔离操作，以保证各个线程获取数据的准确性，在介绍数据库提供的各种**隔离级别**之前，我们先看看如果不考虑事务的**隔离性**，会发生的几种问题：</p>
+<h4 id="1">1，脏读</h4>
 <p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
 <p>当一个事务正在多次修改某个数据，而在这个事务中这多次的修改都还未提交，这时一个并发的事务来访问该数据，就会造成两个事务得到的数据不一致。例如：用户A向用户B转账100元，对应SQL命令如下</p>
-<pre><code>    update account set money=money+100 where name=’B’;  (此时A通知B)
+<div class="highlight"><pre><span></span><code>    update account set money=money+100 where name=’B’;  (此时A通知B)
 
     update account set money=money - 100 where name=’A’;
-</code></pre>
+</code></pre></div>
 <p>当只执行第一条SQL时，A通知B查看账户，B发现确实钱已到账（此时即发生了脏读），而之后无论第二条SQL是否执行，只要该事务不提交，则所有操作都将回滚，那么当B以后再次查看账户时就会发现钱其实并没有转。</p>
-<h4 id="2">2，不可重复读<a class="headerlink" href="#2" title="Permanent link">#</a></h4>
+<h4 id="2">2，不可重复读</h4>
 <p>不可重复读是指在对于数据库中的某个数据，一个事务范围内多次查询却返回了不同的数据值，这是由于在查询间隔，被另一个事务修改并提交了。</p>
 <p>例如事务T1在读取某一数据，而事务T2立马修改了这个数据并且提交事务给数据库，事务T1再次读取该数据就得到了不同的结果，发送了不可重复读。</p>
 <p>不可重复读和脏读的区别是，脏读是某一事务读取了另一个事务未提交的脏数据，而不可重复读则是读取了前一事务提交的数据。</p>
 <p>在某些情况下，不可重复读并不是问题，比如我们多次查询某个数据当然以最后查询得到的结果为主。但在另一些情况下就有可能发生问题，例如对于同一个数据A和B依次查询就可能不同，A和B就可能打起来了……</p>
-<h4 id="3">3，虚读(幻读)<a class="headerlink" href="#3" title="Permanent link">#</a></h4>
+<h4 id="3">3，虚读(幻读)</h4>
 <p>幻读是事务非独立执行时发生的一种现象。例如事务T1对一个表中所有的行的某个数据项做了从“1”修改为“2”的操作，这时事务T2又对这个表中插入了一行数据项，而这个数据项的数值还是为“1”并且提交给数据库。而操作事务T1的用户如果再查看刚刚修改的数据，会发现还有一行没有修改，其实这行是从事务T2中添加的，就好像产生幻觉一样，这就是发生了幻读。</p>
 <p>幻读和不可重复读都是读取了另一条已经提交的事务（这点就脏读不同），所不同的是不可重复读查询的都是同一个数据项，而幻读针对的是一批数据整体（比如数据的个数）。</p>
-<h3 id="isolation-level">Isolation level<a class="headerlink" href="#isolation-level" title="Permanent link">#</a></h3>
+<h3 id="isolation#level">Isolation level</h3>
 <p>现在来看看MySQL数据库为我们提供的四种隔离级别：</p>
 <p>① Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</p>
 <p>② Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</p>
@@ -718,13 +1396,13 @@
 <p>以上四种隔离级别最高的是Serializable级别，最低的是Read uncommitted级别，当然级别越高，执行效率就越低。像Serializable这样的级别，就是以锁表的方式(类似于Java多线程中的锁)使得其他的线程只能在锁外等待，所以平时选用何种隔离级别应该根据实际情况。在MySQL数据库中默认的隔离级别为Repeatable read (可重复读)。</p>
 <p>在MySQL数据库中，支持上面四种隔离级别，默认的为Repeatable read (可重复读)；而在Oracle数据库中，只支持Serializable (串行化)级别和Read committed (读已提交)这两种级别，其中默认的为Read committed级别。</p>
 <p>在MySQL数据库中查看当前事务的隔离级别：</p>
-<pre><code>    select @@tx_isolation;
-</code></pre>
+<div class="highlight"><pre><span></span><code>    select @@tx_isolation;
+</code></pre></div>
 <p>在MySQL数据库中设置事务的隔离 级别：</p>
-<pre><code>    set  [glogal | session]  transaction isolation level 隔离级别名称;
+<div class="highlight"><pre><span></span><code>    set  [glogal | session]  transaction isolation level 隔离级别名称;
 
     set tx_isolation=’隔离级别名称;’
-</code></pre>
+</code></pre></div>
 <p>例1：查看当前事务的隔离级别：</p>
 <p><img alt="img" src="https://images2015.cnblogs.com/blog/787876/201603/787876-20160313202200007-1111796802.png" /></p>
 <p>例2：将事务的隔离级别设置为Read uncommitted级别：</p>
@@ -738,10 +1416,10 @@
 <p><img alt="img" src="https://images2015.cnblogs.com/blog/787876/201603/787876-20160313202355694-2106931487.png" /></p>
 <p>后记：隔离级别的设置只对当前链接有效。对于使用MySQL命令窗口而言，一个窗口就相当于一个链接，当前窗口设置的隔离级别只对当前窗口中的事务有效；对于JDBC操作数据库来说，一个Connection对象相当于一个链接，而对于Connection对象设置的隔离级别只对该Connection对象有效，与其他链接Connection对象无关。</p>
 <p>参考博客：</p>
-<p>http://www.zhihu.com/question/23989904</p>
-<p>http://dev.mysql.com/doc/refman/5.6/en/set-transaction.html</p>
-<p>http://www.cnblogs.com/xdp-gacl/p/3984001.html</p>
-<h2 id="wikipedia-acid">wikipedia <a href="https://en.wikipedia.org/wiki/ACID">ACID</a><a class="headerlink" href="#wikipedia-acid" title="Permanent link">#</a></h2>
+<p><a href="http://www.zhihu.com/question/23989904">http://www.zhihu.com/question/23989904</a></p>
+<p><a href="http://dev.mysql.com/doc/refman/5.6/en/set-transaction.html">http://dev.mysql.com/doc/refman/5.6/en/set-transaction.html</a></p>
+<p><a href="http://www.cnblogs.com/xdp-gacl/p/3984001.html">http://www.cnblogs.com/xdp-gacl/p/3984001.html</a></p>
+<h2 id="wikipedia#acid">wikipedia <a href="https://en.wikipedia.org/wiki/ACID">ACID</a></h2>
 <p>In <a href="https://en.wikipedia.org/wiki/Computer_science">computer science</a>, <strong>ACID</strong> (<a href="https://en.wikipedia.org/wiki/Atomicity_(database_systems)">atomicity</a>, <a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">consistency</a>, <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)">isolation</a>, <a href="https://en.wikipedia.org/wiki/Durability_(database_systems)">durability</a>) is a set of properties of <a href="https://en.wikipedia.org/wiki/Database_transaction">database transactions</a> intended to guarantee data validity despite errors, power failures, and other mishaps. In the context of <a href="https://en.wikipedia.org/wiki/Database">databases</a>, a sequence of database operations that satisfies the ACID properties (which can be perceived as a single logical operation on the data) is called a <em>transaction</em>. For example, a transfer of funds from one bank account to another, even involving multiple changes such as debiting one account and crediting another, is a single transaction.</p>
                 
               
@@ -757,6 +1435,39 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Transaction/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="Atomicity/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Introduction
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -780,6 +1491,8 @@
     
     
       <script src="../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>
