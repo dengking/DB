@@ -1,0 +1,789 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/Linux-OS/Theory/Database-transaction/Transaction/">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Database transaction - Linux-OS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-27795084-5","mkdocs.org"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database-transaction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-header__button md-logo" aria-label="Linux-OS">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Linux-OS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database transaction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dengking.github.io/Linux-OS" title="Linux-OS" class="md-nav__button md-logo" aria-label="Linux-OS">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Linux-OS
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/dengking/Linux-OS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1">
+        SQLite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQLite" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          SQLite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1">
+        doc
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="doc" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          doc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2" type="checkbox" id="__nav_1_1_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1_2">
+        Technical-and-Design-Documentation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Technical-and-Design-Documentation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Technical-and-Design-Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Technical-and-Design-Documentation/Architecture-of-SQLite/" class="md-nav__link">
+        Architecture-of-SQLite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_2_2" type="checkbox" id="__nav_1_1_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1_2_2">
+        Virtual-Table-Mechanism-Of-SQLite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Virtual-Table-Mechanism-Of-SQLite" data-md-level="5">
+        <label class="md-nav__title" for="__nav_1_1_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Virtual-Table-Mechanism-Of-SQLite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/" class="md-nav__link">
+        Virtual-Table-Mechanism-Of-SQLite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV/" class="md-nav__link">
+        Example-CSV
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Technical-and-Design-Documentation/TODO/" class="md-nav__link">
+        TODO
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_3" type="checkbox" id="__nav_1_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1_3">
+        Extensions
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Extensions" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Extensions/Run-Time-Loadable-Extensions/" class="md-nav__link">
+        Run-Time-Loadable-Extensions
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1_4" type="checkbox" id="__nav_1_1_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1_4">
+        Programming-Interfaces
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming-Interfaces" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Programming-Interfaces
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Programming-Interfaces/How-To-Compile-SQLite/" class="md-nav__link">
+        How-To-Compile-SQLite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQLite/doc/Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function/" class="md-nav__link">
+        Setting-The-Result-Of-An-SQL-Function
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        SQL-compiler
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQL-compiler" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          SQL-compiler
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/SQL-compiler/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Cursor/" class="md-nav__link">
+        Cursor
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stackoverflow-how-do-acid-and-database-transactions-work" class="md-nav__link">
+    stackoverflow How do ACID and database transactions work?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wikipedia-database-transaction" class="md-nav__link">
+    wikipedia Database transaction
+  </a>
+  
+    <nav class="md-nav" aria-label="wikipedia Database transaction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    Purpose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property" class="md-nav__link">
+    Property
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed-transactions" class="md-nav__link">
+    Distributed transactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactional-filesystems" class="md-nav__link">
+    Transactional filesystems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ucsd-lecture-8-transactions-acid-2pc-2pl-serializability" class="md-nav__link">
+    ucsd Lecture 8: Transactions, ACID, 2PC, 2PL, Serializability
+  </a>
+  
+    <nav class="md-nav" aria-label="ucsd Lecture 8: Transactions, ACID, 2PC, 2PL, Serializability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acid-transactions" class="md-nav__link">
+    ACID Transactions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactions-detail-and-example" class="md-nav__link">
+    Transactions, Detail and Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mommit-point" class="md-nav__link">
+    Mommit point
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed-transactions-and-atomic-commit-protocols" class="md-nav__link">
+    Distributed Transactions and Atomic Commit Protocols
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="database-transaction">Database transaction<a class="headerlink" href="#database-transaction" title="Permanent link">#</a></h1>
+<p>Transaction是DBMS中的核心概念，DBMS中的如下内容的基石:</p>
+<p>1) unit of work</p>
+<p>2) unit of concurrency control，在<code>Theory\Concurrency-Control-in-DBMS</code>中进行了描述</p>
+<h2 id="stackoverflow-how-do-acid-and-database-transactions-work">stackoverflow <a href="https://stackoverflow.com/questions/3740280/how-do-acid-and-database-transactions-work">How do ACID and database transactions work?</a><a class="headerlink" href="#stackoverflow-how-do-acid-and-database-transactions-work" title="Permanent link">#</a></h2>
+<p><a href="https://stackoverflow.com/a/3740307">A</a></p>
+<p><a href="http://en.wikipedia.org/wiki/ACID">ACID</a> is a set of properties that you would like to apply when modifying a database.</p>
+<ul>
+<li>Atomicity</li>
+<li>Consistency</li>
+<li>Isolation</li>
+<li>Durability</li>
+</ul>
+<p>A transaction is a set of related changes which is used to achieve some of the ACID properties. Transactions are tools to achieve the ACID properties.</p>
+<p>Atomicity means that you can guarantee that all of a transaction happens, or none of it does; you can do complex operations as one single unit, all or nothing, and a crash, power failure, error, or anything else won't allow you to be in a state in which only some of the related changes have happened.</p>
+<p>Consistency means that you guarantee that your data will be consistent; none of the constraints you have on related data will ever be violated.</p>
+<p>Isolation means that one transaction cannot read data from another transaction that is not yet completed. If two transactions are executing concurrently, each one will see the world as if they were executing sequentially, and if one needs to read data that is written by another, it will have to wait until the other is finished.</p>
+<p>Durability means that once a transaction is complete, it is guaranteed that all of the changes have been recorded to a durable medium (such as a hard disk), and the fact that the transaction has been completed is likewise recorded.</p>
+<p>So, transactions are a mechanism for guaranteeing these properties; they are a way of grouping related actions together such that as a whole, a group of operations can be atomic, produce consistent results, be isolated from other operations, and be durably recorded.</p>
+<h2 id="wikipedia-database-transaction">wikipedia <a href="https://en.wikipedia.org/wiki/Database_transaction">Database transaction</a><a class="headerlink" href="#wikipedia-database-transaction" title="Permanent link">#</a></h2>
+<p>A <strong>database transaction</strong> symbolizes(象征、表示) a <strong>unit of work</strong> performed within a <a href="https://en.wikipedia.org/wiki/Database_management_system">database management system</a> (or similar system) against a database, and treated in a coherent(连贯的、一致的) and reliable way independent of other transactions. A transaction generally represents any change in a database. </p>
+<blockquote>
+<p>NOTE: <strong>unit of work</strong>是理解上面这段话的关键所在，需要以文章《Unit》中描述的思想来看待transaction:</p>
+<p>1、transaction是DB中work的单位，即在DB中，以transaction为单位来度量work，显然，它是比SQL语句更大的一个量级</p>
+<p>2、显然transaction是一个非常好的抽象，它抽象地表示了database work，符合DB的诸多需求，下面进行了描述</p>
+</blockquote>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h3>
+<p>Transactions in a database environment have two main purposes:</p>
+<p>1、To provide reliable units of work that allow correct recovery from failures and keep a database consistent even in cases of system failure, when execution stops (completely or partially) and many operations upon a database remain uncompleted, with unclear status.</p>
+<p>2、To provide isolation between programs accessing a database concurrently. If this isolation is not provided, the programs' outcomes are possibly erroneous.</p>
+<blockquote>
+<p>NOTE: 如何实现isolation呢？</p>
+</blockquote>
+<h3 id="property">Property<a class="headerlink" href="#property" title="Permanent link">#</a></h3>
+<p>A database transaction, by definition, must be <a href="https://en.wikipedia.org/wiki/Atomicity_(database_systems)">atomic</a> (it must either complete in its entirety or have no effect whatsoever), <a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">consistent</a> (it must conform to existing constraints in the database), <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)">isolated</a> (it must not affect other transactions) and <a href="https://en.wikipedia.org/wiki/Durability_(database_systems)">durable</a> (it must get written to persistent storage).[<a href="https://en.wikipedia.org/wiki/Database_transaction#cite_note-1">1]</a> Database practitioners often refer to these properties of database transactions using the acronym <a href="https://en.wikipedia.org/wiki/ACID">ACID</a>.</p>
+<blockquote>
+<p>NOTE: 在<code>Theory\Database-transaction\ACID</code>中进行了专门的介绍。</p>
+</blockquote>
+<h3 id="distributed-transactions">Distributed transactions<a class="headerlink" href="#distributed-transactions" title="Permanent link">#</a></h3>
+<blockquote>
+<p>NOTE: 放到了distributed computing章节中了</p>
+</blockquote>
+<h3 id="transactional-filesystems">Transactional filesystems<a class="headerlink" href="#transactional-filesystems" title="Permanent link">#</a></h3>
+<blockquote>
+<p>NOTE: 这其实是将transaction概念使用到filesystem中</p>
+</blockquote>
+<h2 id="ucsd-lecture-8-transactions-acid-2pc-2pl-serializability">ucsd <a href="https://cseweb.ucsd.edu/classes/sp16/cse291-e/applications/ln/lecture8.html">Lecture 8: Transactions, ACID, 2PC, 2PL, Serializability</a><a class="headerlink" href="#ucsd-lecture-8-transactions-acid-2pc-2pl-serializability" title="Permanent link">#</a></h2>
+<h3 id="acid-transactions">ACID Transactions<a class="headerlink" href="#acid-transactions" title="Permanent link">#</a></h3>
+<p>Traditional database systems have relied upon bundling work into <em>transactions</em> that have the <em>ACID</em> properties. In so doing, they guarantee <strong>consistency</strong> at the expense of availability and/or partition tolerance. </p>
+<blockquote>
+<p>NOTE: CAP theory</p>
+</blockquote>
+<p><em>ACID</em> is an acronym for:</p>
+<p>1、Atomicity</p>
+<p>2、Consistency (serializability)</p>
+<p>3、Isolation</p>
+<p>4、Durability</p>
+<p>1、Acid - "All or nothing"</p>
+<p>2、Consistency -- This implies two types of consistency. It implies that a single system is consistent and that there is consistency across systems. In other words, if $100 is moved from one bank account to another, not only is it subtracted from one and added to another on one host -- it appears this way everywhere. It is this property that allows one transaction to safely follow another.</p>
+<p>3、Isolation - Regardless of the level of concurrency, transactions must yields the same results as if they were executed one at a time (but any one of perhaps several orderings).</p>
+<p>4、Durability - permanance. Changes persist over crashes, &amp;c.</p>
+<h3 id="transactions-detail-and-example">Transactions, Detail and Example<a class="headerlink" href="#transactions-detail-and-example" title="Permanent link">#</a></h3>
+<p><em>Transactions</em> are sequences of actions such that <strong>all</strong> of the operations within the <strong>transaction</strong> succeed (on all recipients) and their effects are permanantly visible, or none of <strong>none</strong> of the operations suceed anywhere and they have no visible effects; this might be because of failure (unintentional) or an abort (intentional).</p>
+<blockquote>
+<p>NOTE: 简而言之: "All or nothing"</p>
+</blockquote>
+<h3 id="mommit-point">Mommit point<a class="headerlink" href="#mommit-point" title="Permanent link">#</a></h3>
+<p>Characterisitically, transactions have a <em>commit point</em>. This is the point of no return. Before this point, we can <strong>undo</strong> a transaction. After this point, all changes are permanant. If problems occur after the <strong>commit point</strong>, we can take compensating(补偿；修正；抵消) or corrective action, but we can't wave a magic wand(魔法棒) and <strong>undo</strong> it.</p>
+<blockquote>
+<p>NOTE: commit后是不能redo的</p>
+</blockquote>
+<h3 id="distributed-transactions-and-atomic-commit-protocols">Distributed Transactions and Atomic Commit Protocols<a class="headerlink" href="#distributed-transactions-and-atomic-commit-protocols" title="Permanent link">#</a></h3>
+<blockquote>
+<p>NOTE: 放到了distributed computing章节中了</p>
+</blockquote>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+    
+  </body>
+</html>
