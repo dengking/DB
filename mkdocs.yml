@@ -1,12 +1,33 @@
 edit_uri: ''
 extra_css:
 - css/extra.css
+extra_javascript:
+- https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
 google_analytics:
 - UA-27795084-5
 - mkdocs.org
 markdown_extensions:
 - toc:
-    permalink: '#'
+    separator: '#'
+- admonition
+- def_list
+- mdx_gh_links:
+    repo: mkdocs
+    user: mkdocs
+- pymdownx.arithmatex
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.caret
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.inlinehilite
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.tilde
 nav:
 - Implementation:
   - SQLite:
@@ -28,10 +49,10 @@ nav:
 - Cursor: Cursor.md
 plugins:
 - search
-repo_url: https://github.com/dengking/Linux-OS
+repo_url: https://github.com/dengking/DB
 site_author: DengKing
 site_description: Project documentation with Markdown.
-site_name: Linux-OS
-site_url: https://dengking.github.io/Linux-OS
+site_name: DB
+site_url: https://dengking.github.io/DB
 theme:
   name: material
