@@ -33,6 +33,8 @@ nav:
   - Database-transaction:
     - Introduction:
       - Introduction: Theory/Database-transaction/Transaction/index.md
+    - Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability:
+      - Introduction: Theory/Database-transaction/Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability/index.md
     - ACID:
       - Introduction: Theory/Database-transaction/ACID/index.md
       - Atomicity:
@@ -44,18 +46,16 @@ nav:
         - Isolation-level:
           - Introduction: Theory/Database-transaction/ACID/Isolation/Isolation-level/index.md
     - Implementation:
+      - Introduction: Theory/Database-transaction/Implementation/index.md
       - Atomic-commit:
         - Introduction: Theory/Database-transaction/Implementation/Atomic-commit/index.md
-      - Two-phase-commit-protocol:
-        - Introduction: Theory/Database-transaction/Implementation/Two-phase-commit-protocol/index.md
-      - Three-phase-commit-protocol:
-        - Introduction: Theory/Database-transaction/Implementation/Three-phase-commit-protocol/index.md
       - Serializability:
         - Introduction: Theory/Database-transaction/Implementation/Serializability/index.md
   - Concurrency-Control-in-DBMS:
     - Introduction: Theory/Concurrency-Control-in-DBMS/index.md
     - Problem:
       - Introduction: Theory/Concurrency-Control-in-DBMS/Problem/index.md
+  - Cursor: Theory/Cursor.md
 - Implementation:
   - SQLite:
     - doc:
@@ -73,7 +73,8 @@ nav:
         - Setting-The-Result-Of-An-SQL-Function: Implementation/SQLite/doc/Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function.md
   - SQL-compiler:
     - Introduction: Implementation/SQL-compiler/index.md
-- Cursor: Cursor.md
+- Expert-Guy-Harrison:
+  - Introduction: Expert-Guy-Harrison/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/DB
