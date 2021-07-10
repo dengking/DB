@@ -1,4 +1,5 @@
 nav:
     - Introduction: Transaction
+    - Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability: Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability
     - ACID: ACID
     - Implementation: Implementation

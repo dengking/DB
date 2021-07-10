@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/Transaction/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Theory/Database-transaction/Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/ACID/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/ACID/Atomicity/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/ACID/Consistency%28database-systems%29/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/ACID/Isolation/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/ACID/Isolation/Isolation-level/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Theory/Database-transaction/Implementation/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/Implementation/Atomic-commit/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/DB/Theory/Database-transaction/Implementation/Two-phase-commit-protocol/</loc>
-     <lastmod>2021-03-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/DB/Theory/Database-transaction/Implementation/Three-phase-commit-protocol/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Database-transaction/Implementation/Serializability/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Concurrency-Control-in-DBMS/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/DB/Theory/Concurrency-Control-in-DBMS/Problem/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Theory/Cursor/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Technical-and-Design-Documentation/Architecture-of-SQLite/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/SQL/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/SQL/join/zhihu-%E5%9B%BE%E8%A7%A3SQL-join/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/SQL/group-by/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Technical-and-Design-Documentation/TODO/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Extensions/Run-Time-Loadable-Extensions/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Technical-and-Design-Documentation/Architecture-of-SQLite/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Programming-Interfaces/How-To-Compile-SQLite/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQLite/doc/Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/Example-CSV/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Implementation/SQL-compiler/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Technical-and-Design-Documentation/TODO/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/DB/Cursor/</loc>
-     <lastmod>2021-03-01</lastmod>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Extensions/Run-Time-Loadable-Extensions/</loc>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Programming-Interfaces/How-To-Compile-SQLite/</loc>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Impl/SQLite/doc/Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function/</loc>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Impl/SQL-compiler/</loc>
+     <lastmod>2021-07-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/DB/Expert-Guy-Harrison/</loc>
+     <lastmod>2021-07-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

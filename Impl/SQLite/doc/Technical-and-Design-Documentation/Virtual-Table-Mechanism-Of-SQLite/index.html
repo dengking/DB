@@ -1,0 +1,2217 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/DB/Impl/SQLite/doc/Technical-and-Design-Documentation/Virtual-Table-Mechanism-Of-SQLite/">
+      
+      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Virtual-Table-Mechanism-Of-SQLite - DB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../../css/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-27795084-5","mkdocs.org"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the#virtual#table#mechanism#of#sqlite" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-header__button md-logo" aria-label="DB">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Virtual-Table-Mechanism-Of-SQLite
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dengking.github.io/DB" title="DB" class="md-nav__button md-logo" aria-label="DB">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    DB
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/dengking/DB" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Theory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1">
+        Database-transaction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Database-transaction" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Database-transaction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_1" type="checkbox" id="__nav_1_1_1" >
+      
+      <label class="md-nav__link" for="__nav_1_1_1">
+        Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Introduction" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Transaction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_2" type="checkbox" id="__nav_1_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_2">
+        Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Course-ucsd-Lecture-8-Transactions-ACID-2PC-2PL-Serializability/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3" type="checkbox" id="__nav_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3">
+        ACID
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="ACID" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          ACID
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_2" type="checkbox" id="__nav_1_1_3_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_2">
+        Atomicity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomicity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atomicity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Atomicity/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_3" type="checkbox" id="__nav_1_1_3_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_3">
+        Consistency(database-systems)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Consistency(database-systems)" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Consistency(database-systems)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Consistency%28database-systems%29/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_4" type="checkbox" id="__nav_1_1_3_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_4">
+        Isolation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Isolation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_3_4_2" type="checkbox" id="__nav_1_1_3_4_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_3_4_2">
+        Isolation-level
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Isolation-level" data-md-level="5">
+        <label class="md-nav__title" for="__nav_1_1_3_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Isolation-level
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/ACID/Isolation/Isolation-level/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_4" type="checkbox" id="__nav_1_1_4" >
+      
+      <label class="md-nav__link" for="__nav_1_1_4">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_4_2" type="checkbox" id="__nav_1_1_4_2" >
+      
+      <label class="md-nav__link" for="__nav_1_1_4_2">
+        Atomic-commit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Atomic-commit" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atomic-commit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Atomic-commit/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1_4_3" type="checkbox" id="__nav_1_1_4_3" >
+      
+      <label class="md-nav__link" for="__nav_1_1_4_3">
+        Serializability
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Serializability" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_1_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Serializability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Database-transaction/Implementation/Serializability/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2">
+        Concurrency-Control-in-DBMS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Concurrency-Control-in-DBMS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Concurrency-Control-in-DBMS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Concurrency-Control-in-DBMS/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" type="checkbox" id="__nav_1_2_2" >
+      
+      <label class="md-nav__link" for="__nav_1_2_2">
+        Problem
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Problem" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Problem
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Concurrency-Control-in-DBMS/Problem/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Cursor/" class="md-nav__link">
+        Cursor
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        SQL
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQL" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../SQL/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        join
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="join" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          join
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_2_1">
+        zhihu-图解SQL-join
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="zhihu-图解SQL-join" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          zhihu-图解SQL-join
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../SQL/join/zhihu-%E5%9B%BE%E8%A7%A3SQL-join/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        group-by
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="group-by" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          group-by
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../SQL/group-by/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      <label class="md-nav__link" for="__nav_3_1">
+        SQLite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQLite" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          SQLite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_1" type="checkbox" id="__nav_3_1_1" checked>
+      
+      <label class="md-nav__link" for="__nav_3_1_1">
+        doc
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="doc" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          doc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_1_2" type="checkbox" id="__nav_3_1_1_2" checked>
+      
+      <label class="md-nav__link" for="__nav_3_1_1_2">
+        Technical-and-Design-Documentation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Technical-and-Design-Documentation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Technical-and-Design-Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Architecture-of-SQLite/" class="md-nav__link">
+        Architecture-of-SQLite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_1_2_2" type="checkbox" id="__nav_3_1_1_2_2" checked>
+      
+      <label class="md-nav__link" for="__nav_3_1_1_2_2">
+        Virtual-Table-Mechanism-Of-SQLite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Virtual-Table-Mechanism-Of-SQLite" data-md-level="5">
+        <label class="md-nav__title" for="__nav_3_1_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Virtual-Table-Mechanism-Of-SQLite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Virtual-Table-Mechanism-Of-SQLite
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Virtual-Table-Mechanism-Of-SQLite
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1#introduction" class="md-nav__link">
+    1. Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11#usage" class="md-nav__link">
+    1.1. Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create#virtual#table" class="md-nav__link">
+    CREATE VIRTUAL TABLE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-argument" class="md-nav__link">
+    Module-argument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111#temporary#virtual#tables" class="md-nav__link">
+    1.1.1. Temporary virtual tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112#eponymous#virtual#tables" class="md-nav__link">
+    1.1.2. Eponymous virtual tables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12#implementation" class="md-nav__link">
+    1.2. Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_module#structure" class="md-nav__link">
+    The sqlite3_module structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_vtab#structure" class="md-nav__link">
+    The sqlite3_vtab structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_vtab_cursor#structure" class="md-nav__link">
+    The sqlite3_vtab_cursor structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register#module#sqlite3_create_module" class="md-nav__link">
+    Register module: sqlite3_create_module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13#virtual#tables#and#shared#cache" class="md-nav__link">
+    1.3. Virtual Tables And Shared Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14#creating#new#virtual#table#implementations" class="md-nav__link">
+    1.4. Creating New Virtual Table Implementations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#virtual#table#methods" class="md-nav__link">
+    2. Virtual Table Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Virtual Table Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary#of#methods" class="md-nav__link">
+    Summary of methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21#the#xcreate#method" class="md-nav__link">
+    2.1. The xCreate Method
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. The xCreate Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#argv" class="md-nav__link">
+    argv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppvtab" class="md-nav__link">
+    ppVTab
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite3_declare_vtab" class="md-nav__link">
+    sqlite3_declare_vtab()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211#hidden#columns#in#virtual#tables" class="md-nav__link">
+    2.1.1. Hidden columns in virtual tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212#table-valued#functions" class="md-nav__link">
+    2.1.2. Table-valued functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213#without#rowid#virtual#tables" class="md-nav__link">
+    2.1.3. WITHOUT ROWID Virtual Tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22#the#xconnect#method" class="md-nav__link">
+    2.2. The xConnect Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23#the#xbestindex#method" class="md-nav__link">
+    2.3. The xBestIndex Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#231#inputs" class="md-nav__link">
+    2.3.1. Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26#the#xopen#method" class="md-nav__link">
+    2.6. The xOpen Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29#the#xfilter#method" class="md-nav__link">
+    2.9. The xFilter Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211#the#xcolumn#method" class="md-nav__link">
+    2.11. The xColumn Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212#the#xrowid#method" class="md-nav__link">
+    2.12. The xRowid Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213#the#xupdate#method" class="md-nav__link">
+    2.13. The xUpdate Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Example-CSV/" class="md-nav__link">
+        Example-CSV
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TODO/" class="md-nav__link">
+        TODO
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_1_3" type="checkbox" id="__nav_3_1_1_3" >
+      
+      <label class="md-nav__link" for="__nav_3_1_1_3">
+        Extensions
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Extensions" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_1_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Extensions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Extensions/Run-Time-Loadable-Extensions/" class="md-nav__link">
+        Run-Time-Loadable-Extensions
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_1_4" type="checkbox" id="__nav_3_1_1_4" >
+      
+      <label class="md-nav__link" for="__nav_3_1_1_4">
+        Programming-Interfaces
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming-Interfaces" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_1_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Programming-Interfaces
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Programming-Interfaces/How-To-Compile-SQLite/" class="md-nav__link">
+        How-To-Compile-SQLite
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Programming-Interfaces/Setting-The-Result-Of-An-SQL-Function/" class="md-nav__link">
+        Setting-The-Result-Of-An-SQL-Function
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        SQL-compiler
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SQL-compiler" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          SQL-compiler
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../SQL-compiler/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Expert-Guy-Harrison
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Expert-Guy-Harrison" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Expert-Guy-Harrison
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Expert-Guy-Harrison/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1#introduction" class="md-nav__link">
+    1. Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11#usage" class="md-nav__link">
+    1.1. Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create#virtual#table" class="md-nav__link">
+    CREATE VIRTUAL TABLE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-argument" class="md-nav__link">
+    Module-argument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#111#temporary#virtual#tables" class="md-nav__link">
+    1.1.1. Temporary virtual tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112#eponymous#virtual#tables" class="md-nav__link">
+    1.1.2. Eponymous virtual tables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12#implementation" class="md-nav__link">
+    1.2. Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_module#structure" class="md-nav__link">
+    The sqlite3_module structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_vtab#structure" class="md-nav__link">
+    The sqlite3_vtab structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the#sqlite3_vtab_cursor#structure" class="md-nav__link">
+    The sqlite3_vtab_cursor structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register#module#sqlite3_create_module" class="md-nav__link">
+    Register module: sqlite3_create_module
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13#virtual#tables#and#shared#cache" class="md-nav__link">
+    1.3. Virtual Tables And Shared Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14#creating#new#virtual#table#implementations" class="md-nav__link">
+    1.4. Creating New Virtual Table Implementations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#virtual#table#methods" class="md-nav__link">
+    2. Virtual Table Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Virtual Table Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary#of#methods" class="md-nav__link">
+    Summary of methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21#the#xcreate#method" class="md-nav__link">
+    2.1. The xCreate Method
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. The xCreate Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#argv" class="md-nav__link">
+    argv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppvtab" class="md-nav__link">
+    ppVTab
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite3_declare_vtab" class="md-nav__link">
+    sqlite3_declare_vtab()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211#hidden#columns#in#virtual#tables" class="md-nav__link">
+    2.1.1. Hidden columns in virtual tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212#table-valued#functions" class="md-nav__link">
+    2.1.2. Table-valued functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213#without#rowid#virtual#tables" class="md-nav__link">
+    2.1.3. WITHOUT ROWID Virtual Tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22#the#xconnect#method" class="md-nav__link">
+    2.2. The xConnect Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23#the#xbestindex#method" class="md-nav__link">
+    2.3. The xBestIndex Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#231#inputs" class="md-nav__link">
+    2.3.1. Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26#the#xopen#method" class="md-nav__link">
+    2.6. The xOpen Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29#the#xfilter#method" class="md-nav__link">
+    2.9. The xFilter Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211#the#xcolumn#method" class="md-nav__link">
+    2.11. The xColumn Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212#the#xrowid#method" class="md-nav__link">
+    2.12. The xRowid Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213#the#xupdate#method" class="md-nav__link">
+    2.13. The xUpdate Method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="the#virtual#table#mechanism#of#sqlite"><a href="https://www.sqlite.org/vtab.html">The Virtual Table Mechanism Of SQLite</a></h1>
+<h2 id="1#introduction">1. Introduction</h2>
+<p>A <strong>virtual table</strong> is an object that is registered with an open SQLite <a href="https://www.sqlite.org/c3ref/sqlite3.html">database connection</a>. From the perspective of an <strong>SQL statement</strong>, the <strong>virtual table object</strong> looks like any other table or view. But behind the scenes, queries and updates on a virtual table invoke callback methods of the virtual table object instead of reading and writing on the database file.</p>
+<blockquote>
+<p>NOTE: 显然，virtual table is an abstraction；virtual table的callback method，在“2. Virtual Table Methods”中进行了介绍。</p>
+</blockquote>
+<ul>
+<li>
+<p>One cannot create a trigger on a virtual table.</p>
+</li>
+<li>
+<p>One cannot create additional indices on a virtual table. (Virtual tables can have indices but that must be built into the virtual table implementation. Indices cannot be added separately using <a href="https://www.sqlite.org/lang_createindex.html">CREATE INDEX</a> statements.)</p>
+</li>
+<li>
+<p>One cannot run <a href="https://www.sqlite.org/lang_altertable.html">ALTER TABLE ... ADD COLUMN</a> commands against a virtual table.</p>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: 上述cannot要如何理解？是指一旦用户提交了这样的语句，就会导致崩溃？还是对应的语句无法被执行？需要实践来验证。</p>
+</blockquote>
+<p>Individual virtual table implementations might impose additional constraints. For example, some virtual implementations might provide read-only tables. Or some virtual table implementations might allow <a href="https://www.sqlite.org/lang_insert.html">INSERT</a> or <a href="https://www.sqlite.org/lang_delete.html">DELETE</a> but not <a href="https://www.sqlite.org/lang_update.html">UPDATE</a>. Or some virtual table implementations might limit the kinds of UPDATEs that can be made.</p>
+<blockquote>
+<p>NOTE: 这些constrain要如何来实现？</p>
+</blockquote>
+<p>See the <a href="https://www.sqlite.org/vtablist.html">list of virtual tables</a> page for a longer list of actual virtual table implementations.</p>
+<h2 id="11#usage">1.1. Usage</h2>
+<h3 id="create#virtual#table"><a href="https://www.sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a></h3>
+<p>A virtual table is created using a <a href="https://www.sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a> statement.</p>
+<blockquote>
+<p>NOTE:思考：如何register module？这在下面的“1.2. Implementation”章节中进行了详细介绍。</p>
+</blockquote>
+<h3 id="module-argument">Module-argument</h3>
+<p>The format of the arguments to the module is very general. Each <strong>module-argument</strong> may contain keywords, string literals, identifiers, numbers, and punctuation. Each <strong>module-argument</strong> is passed as written (as text) into the <a href="https://sqlite.org/vtab.html#xcreate">constructor method</a> of the virtual table implementation when the virtual table is created and that constructor is responsible for parsing and interpreting the arguments. The argument syntax is sufficiently general that a virtual table implementation can, if it wants to, interpret its arguments as <a href="https://sqlite.org/lang_createtable.html#tablecoldef">column definitions</a> in an ordinary <a href="https://sqlite.org/lang_createtable.html">CREATE TABLE</a> statement. The implementation could also impose some other interpretation on the arguments.</p>
+<blockquote>
+<p>NOTE: 由constructor method来实现对module-argument的parsing and interpreting；</p>
+<p>可以将column definition通过module-argument传入。</p>
+</blockquote>
+<h3 id="111#temporary#virtual#tables">1.1.1. Temporary virtual tables</h3>
+<h3 id="112#eponymous#virtual#tables">1.1.2. Eponymous virtual tables</h3>
+<blockquote>
+<p>NOTE: "eponymous"的意思是: 以本名命名的</p>
+<p>所谓的Eponymous virtual table，其实就是sqlite实现中，使用到的virtual table，比如非常典型的：<a href="https://sqlite.org/dbstat.html">dbstat virtual table</a>.</p>
+</blockquote>
+<h2 id="12#implementation">1.2. Implementation</h2>
+<h3 id="the#sqlite3_module#structure">The <a href="https://sqlite.org/c3ref/module.html">sqlite3_module</a> structure</h3>
+<blockquote>
+<p>NOTE: 更加准确地说是“virtual table module”，这个名称更好理解。</p>
+</blockquote>
+<p>Think of a module as a class from which one can construct multiple virtual tables having similar properties. For example, one might have a module that provides read-only access to comma-separated-value (CSV) files on disk. That one module can then be used to create several virtual tables where each virtual table refers to a different CSV file.</p>
+<blockquote>
+<p>NOTE: 也就是说，一类virtual table，需要实现一个virtual table module，比如上面提及的： read-only access to comma-separated-value (CSV) files。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span> <span class="nc">sqlite3_module</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">iVersion</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xCreate</span><span class="p">)(</span><span class="n">sqlite3</span><span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">pAux</span><span class="p">,</span>
+               <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span><span class="o">*</span><span class="n">argv</span><span class="p">,</span>
+               <span class="n">sqlite3_vtab</span> <span class="o">**</span><span class="n">ppVTab</span><span class="p">,</span>
+               <span class="kt">char</span> <span class="o">**</span><span class="n">pzErr</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xConnect</span><span class="p">)(</span><span class="n">sqlite3</span><span class="o">*</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">pAux</span><span class="p">,</span>
+               <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span><span class="o">*</span><span class="n">argv</span><span class="p">,</span>
+               <span class="n">sqlite3_vtab</span> <span class="o">**</span><span class="n">ppVTab</span><span class="p">,</span>
+               <span class="kt">char</span> <span class="o">**</span><span class="n">pzErr</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xBestIndex</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="n">sqlite3_index_info</span><span class="o">*</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xDisconnect</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xDestroy</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xOpen</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="n">sqlite3_vtab_cursor</span> <span class="o">**</span><span class="n">ppCursor</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xClose</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xFilter</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idxNum</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">idxStr</span><span class="p">,</span>
+                <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">sqlite3_value</span> <span class="o">**</span><span class="n">argv</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xNext</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xEof</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xColumn</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">,</span> <span class="n">sqlite3_context</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xRowid</span><span class="p">)(</span><span class="n">sqlite3_vtab_cursor</span><span class="o">*</span><span class="p">,</span> <span class="n">sqlite_int64</span> <span class="o">*</span><span class="n">pRowid</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xUpdate</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="n">sqlite3_value</span> <span class="o">**</span><span class="p">,</span> <span class="n">sqlite_int64</span> <span class="o">*</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xBegin</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xSync</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xCommit</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xRollback</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xFindFunction</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVtab</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nArg</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zName</span><span class="p">,</span>
+                     <span class="kt">void</span> <span class="p">(</span><span class="o">**</span><span class="n">pxFunc</span><span class="p">)(</span><span class="n">sqlite3_context</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="n">sqlite3_value</span><span class="o">**</span><span class="p">),</span>
+                     <span class="kt">void</span> <span class="o">**</span><span class="n">ppArg</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">Rename</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVtab</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zNew</span><span class="p">);</span>
+  <span class="cm">/* The methods above are in version 1 of the sqlite_module object. Those </span>
+<span class="cm">  ** below are for version 2 and greater. */</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xSavepoint</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xRelease</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xRollbackTo</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+  <span class="cm">/* The methods above are in versions 1 and 2 of the sqlite_module object.</span>
+<span class="cm">  ** Those below are for version 3 and greater. */</span>
+  <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xShadowName</span><span class="p">)(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+<blockquote>
+<p>NOTE: 传入一个 <code>sqlite3_module</code> 实例，该实例的每个成员指向对应的实现函数</p>
+</blockquote>
+<p>The module structure defines all of the methods for each virtual table object. </p>
+<h3 id="the#sqlite3_vtab#structure">The <a href="https://sqlite.org/c3ref/vtab.html">sqlite3_vtab</a> structure</h3>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span> <span class="nc">sqlite3_vtab</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">sqlite3_module</span> <span class="o">*</span><span class="n">pModule</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">nRef</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zErrMsg</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Virtual table implementations will normally <strong>subclass</strong> this structure to add additional private and implementation-specific fields. </p>
+<blockquote>
+<p>NOTE: 如何实现subclass？C中貌似没有subclass机制；在File <a href="https://sqlite.org/src/finfo?name=ext/misc/csv.c&amp;m=tip">ext/misc/csv.c</a> from the <a href="https://sqlite.org/src/info/tip">latest check-in</a>中给出了这样的一个例子:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* An instance of the CSV virtual table */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">CsvTable</span> <span class="p">{</span>
+  <span class="n">sqlite3_vtab</span> <span class="n">base</span><span class="p">;</span>              <span class="cm">/* Base class.  Must be first */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zFilename</span><span class="p">;</span>                <span class="cm">/* Name of the CSV file */</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">zData</span><span class="p">;</span>                    <span class="cm">/* Raw CSV data in lieu of zFilename */</span>
+  <span class="kt">long</span> <span class="n">iStart</span><span class="p">;</span>                    <span class="cm">/* Offset to start of data in zFilename */</span>
+  <span class="kt">int</span> <span class="n">nCol</span><span class="p">;</span>                       <span class="cm">/* Number of columns in the CSV file */</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tstFlags</span><span class="p">;</span>          <span class="cm">/* Bit values used for testing */</span>
+<span class="p">}</span> <span class="n">CsvTable</span><span class="p">;</span>
+</code></pre></div>
+</blockquote>
+<p>The <code>nRef</code> field is used internally by the SQLite core and should not be altered by the virtual table implementation. The virtual table implementation may pass error message text to the core by putting an error message string in <code>zErrMsg</code>. Space to hold this error message string must be obtained from an SQLite memory allocation function such as <a href="https://sqlite.org/c3ref/mprintf.html">sqlite3_mprintf()</a> or <a href="https://sqlite.org/c3ref/free.html">sqlite3_malloc()</a>. Prior to assigning a new value to <code>zErrMsg</code>, the virtual table implementation must free any preexisting content of <code>zErrMsg</code> using <a href="https://sqlite.org/c3ref/free.html">sqlite3_free()</a>. Failure to do this will result in a memory leak.</p>
+<blockquote>
+<p>NOTE: 看了，sqlite是自己实现的memory management。</p>
+</blockquote>
+<h3 id="the#sqlite3_vtab_cursor#structure">The <a href="https://sqlite.org/c3ref/vtab_cursor.html">sqlite3_vtab_cursor</a> structure</h3>
+<blockquote>
+<p>NOTE: <a href="https://sqlite.org/c3ref/vtab_cursor.html">sqlite3_vtab_cursor</a> 其实相当于一个 pointer，这个结构非常重要，后续的很多操作都是在它的基础上完成的，在"2. Virtual Table Methods"章节中，会对此进行总结。</p>
+</blockquote>
+<p>Once again, practical implementations will likely subclass this structure to add additional private fields.</p>
+<blockquote>
+<p>NOTE:在File <a href="https://sqlite.org/src/finfo?name=ext/misc/csv.c&amp;m=tip">ext/misc/csv.c</a> from the <a href="https://sqlite.org/src/info/tip">latest check-in</a>中给出了这样的一个例子:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* A cursor for the CSV virtual table */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="nc">CsvCursor</span> <span class="p">{</span>
+  <span class="n">sqlite3_vtab_cursor</span> <span class="n">base</span><span class="p">;</span>       <span class="cm">/* Base class.  Must be first */</span>
+  <span class="n">CsvReader</span> <span class="n">rdr</span><span class="p">;</span>                  <span class="cm">/* The CsvReader object */</span>
+  <span class="kt">char</span> <span class="o">**</span><span class="n">azVal</span><span class="p">;</span>                   <span class="cm">/* Value of the current row */</span>
+  <span class="kt">int</span> <span class="o">*</span><span class="n">aLen</span><span class="p">;</span>                      <span class="cm">/* Length of each entry */</span>
+  <span class="n">sqlite3_int64</span> <span class="n">iRowid</span><span class="p">;</span>           <span class="cm">/* The current rowid.  Negative for EOF */</span>
+<span class="p">}</span> <span class="n">CsvCursor</span><span class="p">;</span>
+</code></pre></div>
+</blockquote>
+<h3 id="register#module#sqlite3_create_module">Register module: <code>sqlite3_create_module</code></h3>
+<p>Before a <a href="https://sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a> statement can be run, the module specified in that statement must be registered with the database connection. This is accomplished using either of the <a href="https://sqlite.org/c3ref/create_module.html">sqlite3_create_module()</a> or <a href="https://sqlite.org/c3ref/create_module.html">sqlite3_create_module_v2()</a> interfaces.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="nf">sqlite3_create_module</span><span class="p">(</span>
+  <span class="n">sqlite3</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span>               <span class="cm">/* SQLite connection to register module with */</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zName</span><span class="p">,</span>         <span class="cm">/* Name of the module */</span>
+  <span class="k">const</span> <span class="n">sqlite3_module</span> <span class="o">*</span><span class="p">,</span>    <span class="cm">/* Methods for the module */</span>
+  <span class="kt">void</span> <span class="o">*</span>                     <span class="cm">/* Client data for xCreate/xConnect */</span>
+<span class="p">);</span>
+<span class="kt">int</span> <span class="nf">sqlite3_create_module_v2</span><span class="p">(</span>
+  <span class="n">sqlite3</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span>               <span class="cm">/* SQLite connection to register module with */</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">zName</span><span class="p">,</span>         <span class="cm">/* Name of the module */</span>
+  <span class="k">const</span> <span class="n">sqlite3_module</span> <span class="o">*</span><span class="p">,</span>    <span class="cm">/* Methods for the module */</span>
+  <span class="kt">void</span> <span class="o">*</span><span class="p">,</span>                    <span class="cm">/* Client data for xCreate/xConnect */</span>
+  <span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="n">xDestroy</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span>     <span class="cm">/* Client data destructor function */</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="13#virtual#tables#and#shared#cache">1.3. Virtual Tables And Shared Cache</h3>
+<h3 id="14#creating#new#virtual#table#implementations">1.4. Creating New Virtual Table Implementations</h3>
+<blockquote>
+<p>NOTE: virtual table module有两种实现方式:</p>
+<table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://sqlite.org/loadext.html">Run-Time Loadable Extensions</a></td>
+<td></td>
+</tr>
+<tr>
+<td>和SQLite编译到一起</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h2 id="2#virtual#table#methods">2. Virtual Table Methods</h2>
+<h3 id="summary#of#methods">Summary of methods</h3>
+<blockquote>
+<p>NOTE: 本段是我添加的，原文并没有</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>explanation</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xCreate</td>
+<td><a href="https://www.sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a></td>
+<td></td>
+</tr>
+<tr>
+<td>xConnect</td>
+<td>establish a new connection to an existing virtual table</td>
+<td></td>
+</tr>
+<tr>
+<td>xBestIndex</td>
+<td>the best way to access the virtual table</td>
+<td></td>
+</tr>
+<tr>
+<td>xDisconnect</td>
+<td>destructor for a connection to the virtual table</td>
+<td></td>
+</tr>
+<tr>
+<td>xDestroy</td>
+<td><a href="https://www.sqlite.org/lang_droptable.html">DROP TABLE</a> statement</td>
+<td></td>
+</tr>
+<tr>
+<td>xOpen</td>
+<td>creates a new <strong>cursor</strong> used for accessing (read and/or writing) a virtual table</td>
+<td>required</td>
+</tr>
+<tr>
+<td>xClose</td>
+<td>closes a cursor previously opened by <a href="https://www.sqlite.org/vtab.html#xopen">xOpen</a>.</td>
+<td></td>
+</tr>
+<tr>
+<td>xEof</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xFilter</td>
+<td>begins a search of a virtual table</td>
+<td></td>
+</tr>
+<tr>
+<td>xNext</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xColumn</td>
+<td></td>
+<td>required</td>
+</tr>
+<tr>
+<td>xUpdate</td>
+<td>insert, delete, or update</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>stack order: 一对相反的操作。</p>
+<p>操作cursor的method:</p>
+<p>都是required</p>
+<p>1) xOpen 复位cursor</p>
+<p>2) xClose</p>
+<p>3) xEof 判断是否到达末尾</p>
+<p>4) xFilter</p>
+<p>5) xNext 移动cursor</p>
+<h3 id="21#the#xcreate#method">2.1. The <code>xCreate</code> Method</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xCreate</span><span class="p">)(</span><span class="n">sqlite3</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">pAux</span><span class="p">,</span>
+             <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span><span class="o">*</span><span class="n">argv</span><span class="p">,</span>
+             <span class="n">sqlite3_vtab</span> <span class="o">**</span><span class="n">ppVTab</span><span class="p">,</span>
+             <span class="kt">char</span> <span class="o">**</span><span class="n">pzErr</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="argv"><code>argv</code></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>是否必传</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>argv[0]</code></td>
+<td>yes</td>
+<td>the name of the <strong>module</strong> being invoked</td>
+</tr>
+<tr>
+<td><code>argv[1]</code></td>
+<td>yes</td>
+<td>the name of the <strong>database</strong> in which the new <strong>virtual table</strong> is being created</td>
+</tr>
+<tr>
+<td><code>argv[2]</code></td>
+<td>yes</td>
+<td>the name of the new virtual table, as specified following the TABLE keyword in the <a href="https://sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a> statement</td>
+</tr>
+<tr>
+<td><code>argv[4]-argv[argc-1]</code></td>
+<td>no</td>
+<td>the fourth and subsequent strings in the argv[] array report the arguments to the module name in the <a href="https://sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a> statement.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ppvtab"><code>ppVTab</code></h4>
+<p>The job of this method is to construct the new virtual table object (an <a href="https://sqlite.org/c3ref/vtab.html">sqlite3_vtab</a> object) and return a pointer to it in <code>*ppVTab</code>.</p>
+<h4 id="sqlite3_declare_vtab"><a href="https://sqlite.org/c3ref/declare_vtab.html">sqlite3_declare_vtab()</a></h4>
+<p>The second argument to <a href="https://sqlite.org/c3ref/declare_vtab.html">sqlite3_declare_vtab()</a> must a zero-terminated UTF-8 string that contains a well-formed <a href="https://sqlite.org/lang_createtable.html">CREATE TABLE</a> statement that defines the columns in the virtual table and their data types. The name of the table in this CREATE TABLE statement is ignored, as are all constraints. Only the column names and datatypes matter. The CREATE TABLE statement string need not to be held in persistent memory. The string can be deallocated and/or reused as soon as the <a href="https://sqlite.org/c3ref/declare_vtab.html">sqlite3_declare_vtab()</a> routine returns.</p>
+<blockquote>
+<p>NOTE: 参数<code>zCreateTable</code>是有谁来组织？</p>
+</blockquote>
+<p>If the xCreate method is the exact same pointer as the <a href="https://sqlite.org/vtab.html#xconnect">xConnect</a> method, that indicates that the virtual table does not need to initialize backing store. Such a virtual table can be used as an <a href="https://sqlite.org/vtab.html#epovtab">eponymous virtual table</a> or as a named virtual table using <a href="https://sqlite.org/lang_createvtab.html">CREATE VIRTUAL TABLE</a> or both.</p>
+<blockquote>
+<p>NOTE: backing store在2.2. The xConnect Method中也有所提及，并且其中进行了更加详细的说明</p>
+</blockquote>
+<h3 id="211#hidden#columns#in#virtual#tables">2.1.1. Hidden columns in virtual tables</h3>
+<h3 id="212#table-valued#functions">2.1.2. Table-valued functions</h3>
+<h3 id="213#without#rowid#virtual#tables">2.1.3. WITHOUT ROWID Virtual Tables</h3>
+<h3 id="22#the#xconnect#method">2.2. The xConnect Method</h3>
+<p>The <code>xCreate</code> and <code>xConnect</code> methods are only different when the virtual table has some kind of backing store that must be initialized the first time the virtual table is created. The <code>xCreate</code> method creates and initializes the backing store. The <code>xConnect</code> method just connects to an existing backing store.</p>
+<h3 id="23#the#xbestindex#method">2.3. The xBestIndex Method</h3>
+<p>The SQLite core calls the <code>xBestIndex</code> method when it is compiling a query that involves a <strong>virtual table</strong>. In other words, SQLite calls this method when it is running <a href="https://sqlite.org/c3ref/prepare.html">sqlite3_prepare()</a> or the equivalent. By calling this method, the SQLite core is saying to the virtual table that it needs to access some subset of the rows in the virtual table and it wants to know the most efficient way to do that access. The <code>xBestIndex</code> method replies with information that the SQLite core can then use to conduct an efficient search of the virtual table.</p>
+<h3 id="231#inputs">2.3.1. Inputs</h3>
+<h3 id="26#the#xopen#method">2.6. The xOpen Method</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">xOpen</span><span class="p">)(</span><span class="n">sqlite3_vtab</span> <span class="o">*</span><span class="n">pVTab</span><span class="p">,</span> <span class="n">sqlite3_vtab_cursor</span> <span class="o">**</span><span class="n">ppCursor</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>NOTE: 需要注意的是: <code>xOpen</code>的第二个参数<code>ppCursor</code>是一个二级指针，也就是说，需要由programmer来实现对它的allocation，为什么要这样做呢？有如下原因:</p>
+<ul>
+<li>在"1.2. Implementation"中，我们知道，<code>sqlite3_vtab_cursor</code>是允许subclass的，所以，为了能够支持user subclass，所以必须要由user来进行allocation</li>
+</ul>
+</blockquote>
+<h3 id="29#the#xfilter#method">2.9. The xFilter Method</h3>
+<blockquote>
+<p>NOTE:如何实现多条件过滤？</p>
+</blockquote>
+<h3 id="211#the#xcolumn#method">2.11. The xColumn Method</h3>
+<h3 id="212#the#xrowid#method">2.12. The xRowid Method</h3>
+<blockquote>
+<p>NOTE: 如何来实现？</p>
+</blockquote>
+<h3 id="213#the#xupdate#method">2.13. The xUpdate Method</h3>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Architecture-of-SQLite/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Architecture-of-SQLite
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="Example-CSV/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Example-CSV
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
