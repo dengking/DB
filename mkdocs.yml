@@ -61,6 +61,8 @@ nav:
   - join:
     - "zhihu-\u56FE\u89E3SQL-join":
       - Introduction: "SQL/join/zhihu-\u56FE\u89E3SQL-join/index.md"
+  - group-by:
+    - Introduction: SQL/group-by/index.md
 - Implementation:
   - SQLite:
     - doc:
