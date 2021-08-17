@@ -1,0 +1,6 @@
+nav:
+    - Introduction: index.md
+    - MySQL’s-Logical-Architecture: MySQL’s-Logical-Architecture
+    - Concurrency-Control: Concurrency-Control
+    - Transactions: Transactions
+    
