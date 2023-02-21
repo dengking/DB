@@ -36,3 +36,18 @@ sqlite>pragma table_info ('table_name')                       --查看指定表�
 sqlite>select typeof('column') from table_name;               --查看指定表字段【column】类型，括号内可不输引号  
 ```
 
+
+
+
+
+## sqlite group by comma join
+
+### stackoverflow [GROUP BY clause to get comma-separated values in sqlite](https://stackoverflow.com/questions/19332722/group-by-clause-to-get-comma-separated-values-in-sqlite)
+
+[A](https://stackoverflow.com/a/19332782)
+
+This should work:
+
+```sql
+SELECT GROUP_CONCAT(eng), hindi FROM enghindi GROUP BY hindi;
+```
